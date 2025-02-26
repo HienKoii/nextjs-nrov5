@@ -40,3 +40,110 @@ a {
     color-scheme: dark;
   }
 }
+.main {
+  background-color: #043a34;
+  border-radius: 0.5rem;
+  padding: 3px;
+}
+
+/* thư viện  */
+.container {
+  max-width: 960px !important;
+}
+.btn-success {
+  background-color: #004742 !important;
+  background-image: url("../../public/imgs/file.svg");
+  background-size: 40px 40px !important;
+  border: 2px solid gold !important;
+  box-shadow: 0 0 10px #ffd700cc !important;
+  color: gold !important;
+  font-weight: 700 !important;
+  text-shadow: -1px -1px 0 #7b5d20, 1px -1px 0 #7b5d20, -1px 1px 0 #7b5d20, 1px 1px 0 #7b5d20;
+  min-width: 120px;
+}
+.btn-success:hover {
+  background-color: #006d5a !important;
+  border-color: gold !important;
+  color: gold !important;
+}
+.btn-link {
+  color: gold !important;
+  text-shadow: -1px -1px 0 #7b5d20, 1px -1px 0 #7b5d20, -1px 1px 0 #7b5d20, 1px 1px 0 #7b5d20 !important;
+}
+.btn-link:hover {
+  opacity: 0.8;
+}
+.card {
+  background-color: #007e70 !important;
+  border-radius: 1rem !important;
+  margin-bottom: 2px;
+  padding-bottom: 8px;
+}
+.text-warning {
+  text-shadow: -1px -1px 0 #7b5d20, 1px -1px 0 #7b5d20, -1px 1px 0 #7b5d20, 1px 1px 0 #7b5d20;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+  background-color: #007e70 !important;
+}
+/* hk css */
+.hk-flex {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+.hk-flex-x {
+  display: flex;
+  align-items: center;
+}
+.hk-flex-y {
+  display: flex;
+  justify-content: center;
+}
+.hk-flex-col-y {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hk-flex-col-x {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hk-flex-y-start {
+  display: flex !important;
+  justify-content: flex-start;
+}
+.hk-flex-y-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* rs css */
+ul li {
+  list-style: none !important;
+}
+a {
+  text-decoration: none !important;
+}
+
+/* chill */
+.post-item {
+  background-color: #fdf8da;
+  border: 1px solid #c4d7b2;
+  border-radius: 16px;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.051);
+  padding: 10px;
+}
+.post-item > .post-image {
+  border: none;
+  width: 65px;
+}
+.post-image {
+  align-self: start;
+  margin-right: 10px;
+  text-align: center;
+  width: 65px;
+}
