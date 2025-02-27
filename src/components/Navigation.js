@@ -11,7 +11,7 @@ export default function Navigation() {
       <Button as={Link} href="/download" variant="success">
         Tải game
       </Button>
-      <Button as={Link} href="/naptien" variant="success">
+      <Button as={Link} href="/payment" variant="success">
         Nạp tiền
       </Button>
       <Button as={Link} href="/giftCode" variant="success">
