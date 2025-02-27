@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 
 export default function Navigation() {
   return (
-    <div className="hk-flex gap-4 my-3 flex-wrap">
+    <div className="hk-flex gap-4 my-1 flex-wrap hk-nav p-3">
       <Button as={Link} href="/" variant="success">
         Trang chủ
       </Button>

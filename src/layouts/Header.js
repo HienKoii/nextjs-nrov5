@@ -1,3 +1,4 @@
+import Logo from "@/components/Logo";
 import Link from "next/link";
 import { useState } from "react";
 import { Button, Card, Image } from "react-bootstrap";
@@ -7,9 +8,7 @@ export default function Header() {
     <Card>
       <Card.Body>
         <div className="hk-flex-col-y">
-          <Link href={"/"} className="hk-flex">
-            <Image src="/imgs/logo.png" alt="logo" width={320} />
-          </Link>
+          <Logo />
           <div className="hk-flex mt-4 gap-2">
             <Button as={Link} href="/login" variant="success" size="sm">
               Đăng nhập
@@ -19,18 +18,20 @@ export default function Header() {
             </Button>
           </div>
         </div>
+
+        <hr />
+        <div className="hk-flex">
+          <ul>
+            <li>
+              <Button variant="link" href="/" className="hk-flex gap-2" style={{ textDecoration: "none" }}>
+                <Image src="/imgs/hot.gif" alt="logo" width={24} />
+                <span className="text-warning">Tham nhóm zalo ngay</span>
+                <Image src="/imgs/hot.gif" alt="logo" width={24} />
+              </Button>
+            </li>
+          </ul>
+        </div>
       </Card.Body>
-      <Card.Footer className="hk-flex">
-        <ul>
-          <li>
-            <Button variant="link" href="/" className="hk-flex gap-2" style={{ textDecoration: "none" }}>
-              <Image src="/imgs/hot.gif" alt="logo" width={24} />
-              <span className="text-warning">Tham nhóm zalo ngay</span>
-              <Image src="/imgs/hot.gif" alt="logo" width={24} />
-            </Button>
-          </li>
-        </ul>
-      </Card.Footer>
     </Card>
   );
 }

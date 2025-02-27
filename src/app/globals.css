@@ -17,11 +17,9 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+}
+body.modal-open {
+  padding-right: 0px !important;
 }
 
 * {
@@ -41,7 +39,8 @@ a {
   }
 }
 .main {
-  background-color: #043a34;
+  /* background-color: #043a34; */
+  background-color: rgba(4, 58, 52, 0.5); /* 50% trong suốt */
   border-radius: 0.5rem;
   padding: 3px;
 }
@@ -82,11 +81,16 @@ a {
 .text-warning {
   text-shadow: -1px -1px 0 #7b5d20, 1px -1px 0 #7b5d20, -1px 1px 0 #7b5d20, 1px 1px 0 #7b5d20;
 }
-
-.modal-header,
-.modal-body,
-.modal-footer {
-  background-color: #007e70 !important;
+.hk.modal.show .modal-content {
+  border-color: #ffb473 !important;
+  border-color: #198754;
+  border-radius: 30px !important;
+  border-width: 3px !important;
+  overflow: hidden;
+}
+.hk.modal.show .modal-body {
+  border-radius: 25px;
+  background-color: #feecd8 !important;
 }
 /* hk css */
 .hk-flex {
@@ -120,6 +124,11 @@ a {
   display: flex;
   justify-content: space-between;
 }
+.transparent-table tr,
+.transparent-table th,
+.transparent-table td {
+  background-color: transparent !important;
+}
 
 /* rs css */
 ul li {
@@ -142,8 +151,19 @@ a {
   width: 65px;
 }
 .post-image {
-  align-self: start;
-  margin-right: 10px;
-  text-align: center;
-  width: 65px;
+  width: 100%;
+  height: 100%;
+  display: flex; /* Căn giữa nếu cần */
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Đảm bảo không bị tràn */
+}
+.post-image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Giữ tỷ lệ và lấp đầy */
+}
+.hk-nav {
+  background-color: #043a34;
+  border-radius: 22px;
 }
