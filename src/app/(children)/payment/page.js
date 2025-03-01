@@ -1,10 +1,20 @@
 "use client";
 import PaymentAtm from "@/components/Payment/Atm";
 import PaymentCard from "@/components/Payment/Card";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
 import { Col, Image, Nav, Row, Tab } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 export default function PaymentPage() {
+  const router = useRouter();
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    if (!token) {
+      toast.error("Vui lòng đăng nhập");
+      router.push("/");
+    }
+  }, [token]);
   return (
     <div>
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">

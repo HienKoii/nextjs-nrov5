@@ -1,3 +1,4 @@
+import Title from "@/components/Title/Title";
 import React from "react";
 import { Card } from "react-bootstrap";
 
@@ -5,8 +6,7 @@ export default function Introduce() {
   return (
     <Card>
       <Card.Body>
-        <Card.Title className="text-white">Giới thiệu</Card.Title>
-        <hr />
+        <Title title={"Giới thiệu"} />
         <p className="text-white">
           Ngọc Rồng Thanh Xuân là Trò Chơi Trực Tuyến với cốt truyện xoay quanh bộ truyện tranh 7 viên Ngọc Rồng. Người chơi sẽ hóa thân thành một trong những anh hùng của 4 hành tinh: Trái Đất, Xayda, Namếc và Fide Cùng
           luyện tập, tăng cường sức mạnh và kỹ năng. Đoàn kết cùng chiến đấu chống lại các thế lực hung ác. Cùng nhau tranh tài.

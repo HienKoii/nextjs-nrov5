@@ -3,9 +3,10 @@
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, FloatingLabel, Form, Spinner } from "react-bootstrap";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -17,6 +18,14 @@ export default function RegisterPage() {
     email: "", // Thêm trường email vào trạng thái
   });
 
+  // Kiểm tra nếu đã có token thì điều hướng về trang chủ
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      router.push("/");
+    }
+  }, [router]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues((prevValues) => ({
@@ -27,6 +36,32 @@ export default function RegisterPage() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    const { username, password, confirmPassword, email } = formValues;
+    setLoading(true);
+    try {
+      const payload = {
+        username,
+        password,
+        confirmPassword,
+        email, // Gửi email cùng với payload
+      };
+      const response = await axios.post("/api/auth/register", payload);
+      console.log("Xử lý đăng ký?>>", response);
+      toast.success(response?.data?.message);
+      toast.success("Hãy đăng nhập ngay nào !!");
+      setFormValues({
+        username: "",
+        password: "",
+        confirmPassword: "",
+        email: "",
+      });
+      router.push("/login");
+    } catch (error) {
+      console.error("Lỗi khi xử lý đăng ký ???", error);
+      toast.error(error?.response?.data?.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -89,12 +124,12 @@ export default function RegisterPage() {
           </Button>
         </div>
 
-        <Button as={Link} href={"/forgot-password"} variant="link" className="w-100">
+        <Button as={Link} href={"/forgot-password"} variant="link" className="w-100 mt-3">
           Quên mật khẩu ?
         </Button>
 
         <div className="hk-flex gap-1 mt-2">
-          <span>Bạn chưa có tài khoản? </span>
+          <span className="text-white">Bạn đã có tài khoản? </span>
           <Button variant="link" as={Link} href={"/login"} className="p-0">
             Đăng nhập ngay!
           </Button>

@@ -1,22 +1,17 @@
-import Logo from "@/components/Logo";
-import Link from "next/link";
-import { useState } from "react";
+import Logo from "@/components/Logo/Logo";
+import AuthNavDefault from "@/components/Nav/AuthNavDefault";
+import AuthNavLogin from "@/components/Nav/AuthNavLogin";
+import { useUser } from "@/context/UserContext";
 import { Button, Card, Image } from "react-bootstrap";
 
 export default function Header() {
+  const { user } = useUser();
   return (
     <Card>
       <Card.Body>
         <div className="hk-flex-col-y">
           <Logo />
-          <div className="hk-flex mt-4 gap-2">
-            <Button as={Link} href="/login" variant="success" size="sm">
-              Đăng nhập
-            </Button>
-            <Button as={Link} href="/register" variant="success" size="sm">
-              Đăng ký
-            </Button>
-          </div>
+          {user ? <AuthNavLogin /> : <AuthNavDefault />}
         </div>
 
         <hr />

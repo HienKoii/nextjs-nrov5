@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Modal, Button, Card } from "react-bootstrap";
-import Logo from "./Logo";
+import Logo from "../Logo/Logo";
 import Link from "next/link";
 
 export default function NotificationModal() {
