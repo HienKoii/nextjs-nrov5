@@ -1,5 +1,5 @@
 "use client";
-import Title from "@/components/Title/Title";
+import Title from "@/components/profile/Title/Title";
 import { formatTime } from "@/lib/utils";
 import axios from "axios";
 import React, { useEffect, useState } from "react";

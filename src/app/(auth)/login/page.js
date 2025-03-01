@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useUser } from "@/context/UserContext";
-import Title from "@/components/Title/Title";
+import Title from "@/components/profile/Title/Title";
 
 export default function LoginPage() {
   const { setUser } = useUser();

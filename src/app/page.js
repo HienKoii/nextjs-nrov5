@@ -7,7 +7,7 @@ import Navigation from "@/components/Nav/Navigation";
 import Link from "next/link";
 import { useState } from "react";
 import NotificationModal from "@/components/Notification/NotificationModal";
-import Title from "@/components/Title/Title";
+import Title from "@/components/profile/Title/Title";
 import PostsList from "@/components/posts/PostsList";
 export default function Home() {
   return (

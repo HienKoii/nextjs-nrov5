@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Title from "../Title/Title";
+import Title from "../profile/Title/Title";
 import PostsItem from "./PostsItem";
 
 export default function PostsList() {

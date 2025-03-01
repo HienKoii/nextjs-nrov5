@@ -1,5 +1,5 @@
 "use client";
-import Title from "@/components/Title/Title";
+import Title from "@/components/profile/Title/Title";
 import Link from "next/link";
 import React from "react";
 import { Button, Card, Col, Image, Row } from "react-bootstrap";

@@ -1,7 +1,7 @@
 "use client";
 import PaymentAtm from "@/components/Payment/Atm";
 import PaymentCard from "@/components/Payment/Card";
-import Title from "@/components/Title/Title";
+import Title from "@/components/profile/Title/Title";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { Col, Image, Nav, Row, Tab } from "react-bootstrap";
