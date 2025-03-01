@@ -2,7 +2,7 @@ import mysql from "mysql2/promise";
 
 const databaseUrl = new URL(process.env.DATABASE_URL);
 
-export const db = mysql.createPool({
+export default db = mysql.createPool({
   host: databaseUrl.hostname,
   user: databaseUrl.username,
   password: databaseUrl.password,
