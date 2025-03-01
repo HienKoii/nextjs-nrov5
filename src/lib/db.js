@@ -1,6 +1,6 @@
 import mysql from "mysql2/promise";
 
-const db = mysql.createPool({
+export const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
@@ -10,4 +10,17 @@ const db = mysql.createPool({
   queueLimit: 0,
 });
 
-export default db;
+async function checkConnection() {
+  try {
+    // Kiểm tra kết nối với database
+    const connection = await db.getConnection();
+    console.log("Kết nối tới MySQL thành công!");
+    connection.release(); // Giải phóng kết nối sau khi sử dụng
+  } catch (error) {
+    console.error("Lỗi khi kết nối tới MySQL:", error.message);
+    console.error("Chi tiết lỗi:", error);
+  }
+}
+
+// Gọi hàm kiểm tra kết nối khi khởi động ứng dụng
+checkConnection();
