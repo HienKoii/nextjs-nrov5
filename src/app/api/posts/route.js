@@ -3,6 +3,13 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
+    console.log("DB Config:", {
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+    });
+
     // Thực hiện truy vấn để lấy tất cả bài viết
     const [res] = await db.query("SELECT * FROM posts");
 
