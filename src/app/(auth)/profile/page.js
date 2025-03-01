@@ -1,6 +1,7 @@
 "use client";
 import Information from "@/components/profile/Information";
 import TransactionHistory from "@/components/profile/TransactionHistory";
+import { useUser } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
@@ -19,6 +20,7 @@ const tabs = [
 ];
 export default function ProfilePage() {
   const router = useRouter();
+  const { handleLogout } = useUser();
   const [activeTab, setActiveTab] = useState(tabs[0].key);
   const token = localStorage.getItem("token");
   useEffect(() => {
@@ -45,6 +47,11 @@ export default function ProfilePage() {
       </Row>
 
       <div className="p-3">{tabs.find((tab) => tab.key === activeTab)?.content}</div>
+      <div className="text-center">
+        <Button variant="success" onClick={() => handleLogout()}>
+          Đăng xuất
+        </Button>
+      </div>
     </div>
   );
 }

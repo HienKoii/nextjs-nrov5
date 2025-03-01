@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useUser } from "@/context/UserContext";
+import Title from "@/components/Title/Title";
 
 export default function LoginPage() {
   const { setUser } = useUser();
@@ -57,31 +58,34 @@ export default function LoginPage() {
   };
 
   return (
-    <Form onSubmit={handleSubmit} className="p-2">
-      <FloatingLabel controlId="floatingInput" label="Tài khoản" className="mb-3">
-        <Form.Control type="text" placeholder="Tài khoản" autoComplete="username" name="username" value={username} onChange={(e) => setUsername(e.target.value)} disabled={loading} />
-      </FloatingLabel>
+    <>
+      <Title title={"Đăng nhập"} />
+      <Form onSubmit={handleSubmit} className="p-2">
+        <FloatingLabel controlId="floatingInput" label="Tài khoản" className="mb-3">
+          <Form.Control type="text" placeholder="Tài khoản" autoComplete="username" name="username" value={username} onChange={(e) => setUsername(e.target.value)} disabled={loading} />
+        </FloatingLabel>
 
-      <FloatingLabel controlId="floatingPassword" label="Mật khẩu">
-        <Form.Control type="password" placeholder="Mật khẩu" autoComplete="current-password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} disabled={loading} />
-      </FloatingLabel>
+        <FloatingLabel controlId="floatingPassword" label="Mật khẩu">
+          <Form.Control type="password" placeholder="Mật khẩu" autoComplete="current-password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} disabled={loading} />
+        </FloatingLabel>
 
-      <div className="d-flex justify-content-center align-items-center">
-        <Button variant="success" type="submit" className="mt-3" disabled={loading}>
-          {loading ? "Đang đăng nhập..." : "Đăng nhập"}
+        <div className="d-flex justify-content-center align-items-center">
+          <Button variant="success" type="submit" className="mt-3" disabled={loading}>
+            {loading ? "Đang đăng nhập..." : "Đăng nhập"}
+          </Button>
+        </div>
+
+        <Button as={Link} href={"/forgot-password"} variant="link" className="w-100">
+          Quên mật khẩu?
         </Button>
-      </div>
 
-      <Button as={Link} href={"/forgot-password"} variant="link" className="w-100">
-        Quên mật khẩu?
-      </Button>
-
-      <div className="hk-flex gap-1 mt-2">
-        <span className="text-white">Bạn chưa có tài khoản? </span>
-        <Button variant="link" as={Link} href={"/register"} className="p-0">
-          Đăng ký ngay!
-        </Button>
-      </div>
-    </Form>
+        <div className="hk-flex gap-1 mt-2">
+          <span className="text-white">Bạn chưa có tài khoản? </span>
+          <Button variant="link" as={Link} href={"/register"} className="p-0">
+            Đăng ký ngay!
+          </Button>
+        </div>
+      </Form>
+    </>
   );
 }

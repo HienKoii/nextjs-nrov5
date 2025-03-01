@@ -1,4 +1,5 @@
 "use client";
+import Title from "@/components/Title/Title";
 import { useState } from "react";
 import { Form, Button, Container, Spinner, Card } from "react-bootstrap";
 
@@ -12,7 +13,8 @@ export default function ForgotPassword() {
   };
 
   return (
-    <Container className="p-3">
+    <>
+      <Title title={"Quên mật khẩu"} />
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicEmail" className="mb-3">
           <Form.Label className="text-warning">Nhập email của bạn</Form.Label>
@@ -30,6 +32,6 @@ export default function ForgotPassword() {
         <p>- Sau khi thấy email hãy ấn vào link đó để đổi mật khẩu !</p>
         <p>- Chúc các bạn chơi game vui vẻ</p>
       </Card>
-    </Container>
+    </>
   );
 }

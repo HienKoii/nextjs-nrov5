@@ -1,4 +1,5 @@
 "use client";
+import Title from "@/components/Title/Title";
 import Link from "next/link";
 import React from "react";
 import { Button, Card, Col, Image, Row } from "react-bootstrap";
@@ -6,6 +7,7 @@ import { Button, Card, Col, Image, Row } from "react-bootstrap";
 export default function DownloadPage() {
   return (
     <>
+      <Title title={"Tải game"} />
       <Row className="p-2">
         <Col xs={12} sm={6} lg={6} className="mb-3">
           <div className="post-item">

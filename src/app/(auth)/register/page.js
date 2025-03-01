@@ -1,5 +1,6 @@
 "use client";
 
+import Title from "@/components/Title/Title";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -66,6 +67,7 @@ export default function RegisterPage() {
 
   return (
     <>
+      <Title title={"Đăng ký"} />
       <Form className="p-2">
         <FloatingLabel controlId="floatingUsername" label="Tài khoản" className="mb-3">
           <Form.Control

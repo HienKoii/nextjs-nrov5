@@ -1,6 +1,7 @@
 "use client";
 import PaymentAtm from "@/components/Payment/Atm";
 import PaymentCard from "@/components/Payment/Card";
+import Title from "@/components/Title/Title";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { Col, Image, Nav, Row, Tab } from "react-bootstrap";
@@ -17,6 +18,7 @@ export default function PaymentPage() {
   }, [token]);
   return (
     <div>
+      <Title title={"Nạp tiền"} />
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">
         <Row>
           <Col sm={12} className="mb-3">
