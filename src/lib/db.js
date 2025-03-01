@@ -1,14 +1,10 @@
 import mysql from "mysql2/promise";
 
-const databaseUrl = new URL(process.env.DATABASE_URL);
-
-export default db = mysql.createPool({
-  host: databaseUrl.hostname,
-  user: databaseUrl.username,
-  password: databaseUrl.password,
-  database: databaseUrl.pathname.replace("/", ""), // Bỏ dấu '/'
-  port: databaseUrl.port || 3306, // Mặc định MySQL dùng cổng 3306
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
+const db = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
+
+export default db;
