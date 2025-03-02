@@ -1,10 +1,13 @@
 import { formatCurrency } from "@/lib/utils";
 import React, { useState } from "react";
-import { Button, Col, Image, Row, Table } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import TextDivider from "../Divider/TextDivider";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function PaymentAtm() {
+  const router = useRouter();
+
   const [selectedValue, setSelectedValue] = useState(null);
   const [showPayment, setShowPayment] = useState(false);
 
@@ -24,6 +27,7 @@ export default function PaymentAtm() {
   const handlePayment = () => {
     if (selectedValue) {
       setShowPayment(!showPayment);
+      router.push("/payment/atm?amount=500000");
     }
   };
 
@@ -64,49 +68,7 @@ export default function PaymentAtm() {
           </div>
         </>
       ) : (
-        <div className="text-center fw-semibold text-white">
-          <Table responsive="sm" hover className="transparent-table">
-            <tbody>
-              <tr>
-                <td className="text-white">Ngân hàng</td>
-                <td className="text-white">Table cell</td>
-              </tr>
-              <tr>
-                <td className="text-white">Chủ tài khoản</td>
-                <td className="text-white">Table cell</td>
-              </tr>
-              <tr>
-                <td className="text-white">Số tài khoản</td>
-                <td className="text-white">Table cell</td>
-              </tr>
-              <tr>
-                <td className="text-white">Số tiền</td>
-                <td className="text-white">Table cell</td>
-              </tr>
-              <tr>
-                <td className="text-white">Nội dung</td>
-                <td className="text-white">Table cell</td>
-              </tr>
-            </tbody>
-          </Table>
-          <div>
-            <p className="fs-5">Quét mã để thanh toán</p>
-            <Image
-              src="https://img.vietqr.io/image/VCB-7377912172763-qr_only.png?&addInfo=naptien 104625&accountName=VO CONG NHAM"
-              alt="qr" //
-              width={250}
-            />
-          </div>
-          <div className="hk-flex p-2 mt-2">
-            <Link href={"/"} className="text-warning">
-              Kiểm tra lịch sử nạp
-            </Link>
-          </div>
-          <p className="fs-6 mt-3">
-            - Lưu ý khi thanh toán: Giao dịch trên hoàn toàn được kiểm duyệt tự động, yêu cầu kiểm tra kỹ nội dung chuyển tiền trước khi thực hiện chuyển. Nếu ghi thiếu, sai hoặc quá 10 phút không thấy cộng tiền, các bạn
-            hãy liên hệ với Admin để được hỗ trợ
-          </p>
-        </div>
+        <> </>
       )}
     </>
   );

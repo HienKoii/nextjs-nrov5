@@ -1,90 +1,49 @@
 "use client";
 import Title from "@/components/profile/Title/Title";
-import Link from "next/link";
-import React from "react";
-import { Button, Card, Col, Image, Row } from "react-bootstrap";
+import useConfig from "@/hook/useConfig";
+import { Col, Image, Row } from "react-bootstrap";
 
 export default function DownloadPage() {
+  const { config } = useConfig();
+
+  const getName = (type) => {
+    switch (type) {
+      case 0:
+        return "ios";
+      case 1:
+        return "ANDROID";
+      case 2:
+        return "Windows";
+      case 3:
+        return "JAVA";
+      default:
+        return "";
+    }
+  };
   return (
     <>
       <Title title={"Tải game"} />
       <Row className="p-2">
-        <Col xs={12} sm={6} lg={6} className="mb-3">
-          <div className="post-item">
-            <div className="hk-flex gap-2">
-              <Image src="/imgs/dow2.png" alt="down" width={52} />
-              <span className="text-warning fw-bold">IOS</span>
-            </div>
-            <hr />
-            <div>
-              - Phiên bản dành cho iphone.
-              <br />- File .ipa
-            </div>
-            <hr />
-            <div>
-              <Button variant="success" className="w-100">
-                Tải xuống
-              </Button>
-            </div>
-          </div>
-        </Col>
-        <Col xs={12} sm={6} lg={6} className="mb-3">
-          <div className="post-item">
-            <div className="hk-flex gap-2">
-              <Image src="/imgs/dow1.png" alt="down" width={52} />
-              <span className="text-warning fw-bold">ANDROID</span>
-            </div>
-            <hr />
-            <div>
-              - Phiên bản dành cho Android.
-              <br />- File .apk
-            </div>
-            <hr />
-            <div>
-              <Button variant="success" className="w-100">
-                Tải xuống
-              </Button>
-            </div>
-          </div>
-        </Col>
-        <Col xs={12} sm={6} lg={6} className="mb-3">
-          <div className="post-item">
-            <div className="hk-flex gap-2">
-              <Image src="/imgs/dow4.png" alt="down" width={52} />
-              <span className="text-warning fw-bold">Windows</span>
-            </div>
-            <hr />
-            <div>
-              - Phiên bản dành cho Windows(pc).
-              <br />- File .rar, .zip
-            </div>
-            <hr />
-            <div>
-              <Button variant="success" className="w-100">
-                Tải xuống
-              </Button>
-            </div>
-          </div>
-        </Col>
-        <Col xs={12} sm={6} lg={6} className="mb-3">
-          <div className="post-item">
-            <div className="hk-flex gap-2">
-              <Image src="/imgs/dow3.png" alt="down" width={52} />
-              <span className="text-warning fw-bold">JAVA</span>
-            </div>
-            <hr />
-            <div>
-              - Phiên bản dành cho JAVA.
-              <br />- File .jar
-            </div>
-            <hr />
-            <div>
-              <Button variant="success" className="w-100">
-                Tải xuống
-              </Button>
-            </div>
-          </div>
-        </Col>
+        {config?.download.map((item, index) => {
+          return (
+            <Col key={index} xs={12} sm={6} lg={6} className="mb-3">
+              <div className="post-item">
+                <div className="hk-flex gap-2">
+                  <Image src={`/imgs/dow${item.type}.png`} alt="down" width={52} />
+                  <span className="text-warning fw-bold text-uppercase">{getName(item.type)}</span>
+                </div>
+                <hr />
+                <div dangerouslySetInnerHTML={{ __html: item.content }} />
+                <hr />
+                <div>
+                  <a href={item.link} download className="btn btn-success w-100">
+                    Tải xuống
+                  </a>
+                </div>
+              </div>
+            </Col>
+          );
+        })}
       </Row>
     </>
   );

@@ -1,10 +1,12 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import useConfig from "@/hook/useConfig";
 
 const UserContext = createContext();
 
 export function UserProvider({ children }) {
+  const { loading: configLoading } = useConfig();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -39,7 +41,7 @@ export function UserProvider({ children }) {
     window.location.href = "/login";
   };
 
-  if (loading) {
+  if (loading || configLoading) {
     return (
       <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh", paddingLeft: "17px" }}>
         <div className="spinner-border text-primary" role="status">

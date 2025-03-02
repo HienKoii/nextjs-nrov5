@@ -1,0 +1,39 @@
+{
+    "title": "Ngọc rồng aro",
+    "description": "Ngọc rồng aro free all, mở thành viên, x99999 thỏi vàng,... ",
+    "logoUrl": "/imgs/logo.png",
+    "thongBao": {
+        "is": true,
+        "text": "Chào mừng bạn đến với nro aro free all<br/>-Server test vĩnh viễn không rerest<br/>-cảm ơn bạn đã đọc thông báo<br/>-Chúc bạn chơi game vui vẻ"
+    },
+    "payment": {
+        "atm": {
+            "key": "VCB",
+            "stk": "1052147418",
+            "name": "Nguyen Kim Hien"
+        },
+        "card": {}
+    },
+    "download": [
+        {
+            "type": 0,
+            "link": "/imgs/logo.png",
+            "content": "Phiên bản dành cho iphone. <br/>- File .ipa"
+        },
+        {
+            "type": 1,
+            "link": "/files/aro.apk",
+            "content": "Phiên bản dành cho Android. <br/>- File .apk"
+        },
+        {
+            "type": 2,
+            "link": "/files/nroaro.rar",
+            "content": "Phiên bản dành cho Windows (pc). <br/>- File .rar, .zip"
+        },
+        {
+            "type": 3,
+            "link": "/files/DragonBoy230Prev1.7.jar",
+            "content": "Phiên bản dành cho Java.<br/>- File .jar"
+        }
+    ]
+}

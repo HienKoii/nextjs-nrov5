@@ -1,6 +1,8 @@
 export const formatCurrency = (value) => {
-  return value?.toLocaleString("vi-VN");
+  const numberValue = Number(value);
+  return !isNaN(numberValue) ? numberValue.toLocaleString("vi-VN") : "0";
 };
+
 export const isValid = (value) => /^[a-z0-9]{1,20}$/.test(value);
 export const formatTime = (isoString, format = "DD/MM/YYYY HH:mm:ss") => {
   const date = new Date(isoString);
