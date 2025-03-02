@@ -27,7 +27,7 @@ export default function PaymentAtm() {
   const handlePayment = () => {
     if (selectedValue) {
       setShowPayment(!showPayment);
-      router.push("/payment/atm?amount=500000");
+      router.push(`/payment/atm?amount=${selectedValue}`);
     }
   };
 
