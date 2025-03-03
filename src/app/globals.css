@@ -59,7 +59,8 @@ a {
   text-shadow: -1px -1px 0 #7b5d20, 1px -1px 0 #7b5d20, -1px 1px 0 #7b5d20, 1px 1px 0 #7b5d20;
   min-width: 120px;
 }
-.btn-success:hover , .btn-success.active {
+.btn-success:hover,
+.btn-success.active {
   background-color: #006d5a !important;
   border-color: gold !important;
   color: gold !important;

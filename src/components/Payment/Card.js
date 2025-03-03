@@ -1,6 +1,9 @@
+import { formatStatusCard } from "@/lib/utils";
+import axios from "axios";
 import Link from "next/link";
 import React, { useState } from "react";
-import { Button, Card, FloatingLabel, Form, Spinner } from "react-bootstrap";
+import { Button, FloatingLabel, Form, Spinner } from "react-bootstrap";
+import Swal from "sweetalert2";
 
 export default function PaymentCard() {
   const [loading, setLoading] = useState(false);
@@ -14,9 +17,41 @@ export default function PaymentCard() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post("/api/payment/payload", formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      Swal.fire({
+        title: "Thông báo",
+        text: formatStatusCard(response?.data?.status),
+        icon: response?.data?.status === 1 || response?.data?.status === 2 ? "success" : "error",
+        scrollbarPadding: false,
+      });
+      setFormData({
+        code: "", // mã thẻ
+        serial: "",
+        telco: "",
+        amount: "",
+      });
+      console.log("Xử lý nạp thẻ ?>>> ", response);
+    } catch (error) {
+      console.log("error nạp thẻ", error);
+      Swal.fire({
+        title: "Thông báo",
+        text: error?.response?.data?.message,
+        icon: "error",
+        scrollbarPadding: false,
+      });
+    } finally {
+      setLoading(false);
+    }
   };
+
   return (
     <div>
       <Form>
@@ -82,7 +117,7 @@ export default function PaymentCard() {
       </Form>
       <>
         <div className="hk-flex p-2 mt-2">
-          <Link href={"/"} className="text-warning">
+          <Link href={"/payment/history"} className="text-warning">
             Kiểm tra lịch sử nạp
           </Link>
         </div>

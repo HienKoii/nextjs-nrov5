@@ -28,7 +28,7 @@ export default function PostsList() {
   return (
     <>
       <Title title="Bài viết mới" />
-      {loading ? <p className="text-center">Đang tải...</p> : listPosts.map((post) => <PostsItem key={post.id} post={post} />)}
+      {loading ? <p className="text-center text-warning">Đang tải dữ liệu...</p> : listPosts.map((post) => <PostsItem key={post.id} post={post} />)}
     </>
   );
 }

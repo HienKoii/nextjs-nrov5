@@ -1,28 +1,23 @@
+import moment from "moment";
+
 export const formatCurrency = (value) => {
   const numberValue = Number(value);
   return !isNaN(numberValue) ? numberValue.toLocaleString("vi-VN") : "0";
 };
 
 export const isValid = (value) => /^[a-z0-9]{1,20}$/.test(value);
-export const formatTime = (isoString, format = "DD/MM/YYYY HH:mm:ss") => {
-  const date = new Date(isoString);
+export const formatTime = (date) => {
+  return moment.utc(date).local().format("DD/MM/YYYY-HH:mm:ss");
+};
+export const formatStatusCard = (statusCode) => {
+  const responseMessages = {
+    1: "Thẻ đúng",
+    2: "Thẻ đúng sai giá",
+    3: "Thẻ lỗi",
+    4: "Hệ thống bảo trì",
+    99: "Thẻ chờ xử lý",
+    100: "Gửi thẻ thất bại - Có lý do đi kèm",
+  };
 
-  const pad = (num) => String(num).padStart(2, "0"); // Thêm '0' nếu cần
-  const day = pad(date.getUTCDate());
-  const month = pad(date.getUTCMonth() + 1); // Tháng tính từ 0
-  const year = date.getUTCFullYear();
-  const hours = pad(date.getUTCHours());
-  const minutes = pad(date.getUTCMinutes());
-  const seconds = pad(date.getUTCSeconds());
-
-  switch (format) {
-    case "DD/MM/YYYY HH:mm:ss":
-      return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
-    case "DD-MM-YYYY HH:mm":
-      return `${day}-${month}-${year} ${hours}:${minutes}`;
-    case "DD tháng MM, YYYY - HH:mm A":
-      return `${day} tháng ${month}, ${year} - ${hours}:${minutes} ${hours >= 12 ? "PM" : "AM"}`;
-    default:
-      return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
-  }
+  return responseMessages[statusCode] || "Mã trạng thái không hợp lệ";
 };

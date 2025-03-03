@@ -1,6 +1,5 @@
 "use client";
 import Information from "@/components/profile/Information";
-import TransactionHistory from "@/components/profile/TransactionHistory";
 import { useUser } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -12,17 +11,14 @@ const tabs = [
     label: "Thông tin",
     content: <Information />,
   },
-  {
-    key: 1,
-    label: "Lịch sử GD", //
-    content: <TransactionHistory />,
-  },
 ];
+
 export default function ProfilePage() {
   const router = useRouter();
   const { handleLogout } = useUser();
   const [activeTab, setActiveTab] = useState(tabs[0].key);
   const token = localStorage.getItem("token");
+
   useEffect(() => {
     if (!token) {
       router.push("/"); // Chuyển hướng về trang đăng nhập
@@ -34,15 +30,13 @@ export default function ProfilePage() {
       <Row className="mb-3">
         <Col className="hk-flex">
           {tabs.map((tab) => (
-            <Button
-              key={tab.key} //
-              variant={activeTab === tab.key ? "success active" : "success "}
-              onClick={() => setActiveTab(tab.key)}
-              className="me-2"
-            >
+            <Button key={tab.key} variant={activeTab === tab.key ? "success active" : "success"} onClick={() => setActiveTab(tab.key)} className="me-2">
               {tab.label}
             </Button>
           ))}
+          <Button variant="success" onClick={() => router.push("/payment/history")}>
+            Lịch sử GD
+          </Button>
         </Col>
       </Row>
 

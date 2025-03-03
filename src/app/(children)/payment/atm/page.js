@@ -27,7 +27,7 @@ export default function PaymentAtmPage() {
           <tbody>
             <tr>
               <td className="text-white">Ngân hàng</td>
-              <td className="text-white">{config?.payment?.atm?.key}</td>
+              <td className="text-white">{config?.payment?.atm?.nameStk}</td>
             </tr>
             <tr>
               <td className="text-white">Chủ tài khoản</td>
@@ -43,20 +43,22 @@ export default function PaymentAtmPage() {
             </tr>
             <tr>
               <td className="text-white">Nội dung</td>
-              <td className="text-white">naptien {user?.id}</td>
+              <td className="text-white">
+                {user?.id} {searchParams.get("trans_id")}
+              </td>
             </tr>
           </tbody>
         </Table>
         <div>
           <p className="fs-5">Quét mã để thanh toán</p>
           <Image
-            src={`https://img.vietqr.io/image/${config?.payment?.atm?.key}-${config?.payment?.atm?.stk}-compact.png?amount=${searchParams.get("amount")}&addInfo=naptien%20${user?.id}`} //
+            src={`https://img.vietqr.io/image/${config?.payment?.atm?.key}-${config?.payment?.atm?.stk}-compact.png?amount=${searchParams.get("amount")}&addInfo=${user?.id}%20${searchParams.get("trans_id")}`} //
             alt="qr" //
             width={250}
           />
         </div>
         <div className="hk-flex p-2 mt-2">
-          <Link href={"/profile"} className="text-warning">
+          <Link href={"/payment/history"} className="text-warning">
             Kiểm tra lịch sử nạp
           </Link>
         </div>

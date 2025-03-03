@@ -4,7 +4,7 @@ import { Button, Col, Row } from "react-bootstrap";
 import TextDivider from "../Divider/TextDivider";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
+import { nanoid } from "nanoid";
 export default function PaymentAtm() {
   const router = useRouter();
 
@@ -27,7 +27,7 @@ export default function PaymentAtm() {
   const handlePayment = () => {
     if (selectedValue) {
       setShowPayment(!showPayment);
-      router.push(`/payment/atm?amount=${selectedValue}`);
+      router.push(`/payment/atm?amount=${selectedValue}&trans_id=${nanoid(5)}`);
     }
   };
 
@@ -62,7 +62,7 @@ export default function PaymentAtm() {
             {selectedValue ? "Thanh toán" : " Vui lòng chọn 1 gói bất kì "}
           </Button>
           <div className="hk-flex p-2 mt-2">
-            <Link href={"/"} className="text-warning">
+            <Link href={"/payment/history"} className="text-warning">
               Kiểm tra lịch sử nạp
             </Link>
           </div>

@@ -11,6 +11,10 @@ export default function Information() {
     <Table responsive="sm" className="transparent-table">
       <tbody>
         <tr>
+          <td className="text-warning">ID</td>
+          <td className="text-white">{user?.id}</td>
+        </tr>
+        <tr>
           <td className="text-warning">Tài khoản</td>
           <td className="text-white">{user?.username}</td>
         </tr>
