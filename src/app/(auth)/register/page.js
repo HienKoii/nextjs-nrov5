@@ -1,6 +1,6 @@
 "use client";
 
-import Title from "@/components/profile/Title/Title";
+import Title from "@/components/Title/Title";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

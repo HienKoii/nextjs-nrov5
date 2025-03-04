@@ -1,5 +1,5 @@
 "use client";
-import Title from "@/components/profile/Title/Title";
+import Title from "@/components/Title/Title";
 import { useParams } from "next/navigation";
 import axios from "axios";
 import { useEffect, useState } from "react";

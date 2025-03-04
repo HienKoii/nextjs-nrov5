@@ -1,5 +1,5 @@
 "use client";
-import Information from "@/components/profile/Information";
+import Information from "@/components/Profile/Information";
 import { useUser } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";

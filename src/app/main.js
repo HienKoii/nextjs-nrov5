@@ -3,6 +3,7 @@ import SakuraEffect from "@/components/Effect/Sakura";
 import Navigation from "@/components/Nav/Navigation";
 import NotificationModal from "@/components/Notification/NotificationModal";
 import { UserProvider } from "@/context/UserContext";
+import useConfig from "@/hook/useConfig";
 import Footer from "@/layouts/Footer";
 import Header from "@/layouts/Header";
 import Introduce from "@/layouts/Introduce";
@@ -11,6 +12,7 @@ import { Card } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 
 export default function MainLayout({ children }) {
+  const { config } = useConfig();
   return (
     <>
       <SakuraEffect />
@@ -20,7 +22,7 @@ export default function MainLayout({ children }) {
             <ToastContainer />
             <Header />
             <Navigation />
-            <NotificationModal />
+            {config?.thongBao?.is && <NotificationModal />}
             <Card>
               <Card.Body>{children}</Card.Body>
             </Card>

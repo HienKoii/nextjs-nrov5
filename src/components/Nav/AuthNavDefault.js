@@ -13,7 +13,7 @@ export default function AuthNavDefault() {
           Đăng ký
         </Button>
       </div>
-      <Link className="text-warning text-center mt-3" href={"/forgot-password"}>
+      <Link className="text-warning text-center my-3" href={"/forgot-password"}>
         Quên mật khẩu ?
       </Link>
     </>

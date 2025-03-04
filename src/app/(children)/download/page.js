@@ -1,5 +1,5 @@
 "use client";
-import Title from "@/components/profile/Title/Title";
+import Title from "@/components/Title/Title";
 import useConfig from "@/hook/useConfig";
 import { Col, Image, Row } from "react-bootstrap";
 

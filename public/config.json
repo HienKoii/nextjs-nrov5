@@ -1,11 +1,19 @@
 {
-    "title": "Ngọc rồng aro",
+    "title": "Chào mừng đến với Ngọc rồng ARO",
+    "nameServer": "Ngọc Rồng Aro",
     "description": "Ngọc rồng aro free all, mở thành viên, x99999 thỏi vàng,... ",
     "logoUrl": "/imgs/logo.png",
     "thongBao": {
         "is": true,
-        "text": "Chào mừng bạn đến với nro aro free all<br/>-Server test vĩnh viễn không rerest<br/>-cảm ơn bạn đã đọc thông báo<br/>-Chúc bạn chơi game vui vẻ"
+        "text": "<p class='text-center'>Chào mừng bạn đến với ngọc rồng aro free all</p>-Server test vĩnh viễn không rerest<br/>-Cảm ơn bạn đã đọc thông báo<br/>-Chúc bạn chơi game vui vẻ"
     },
+    "hotLink": [
+        {
+            "title": "Box Zalo",
+            "text": "Tham nhóm zalo ngay",
+            "href": "https://zalo.me/g/zcaunk919"
+        }
+    ],
     "payment": {
         "atm": {
             "key": "VCB",

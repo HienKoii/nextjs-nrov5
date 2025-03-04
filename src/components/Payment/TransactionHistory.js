@@ -1,7 +1,7 @@
 "use client";
 import { formatCurrency, formatStatusCard, formatTime } from "@/lib/utils";
 import { Badge, Table } from "react-bootstrap";
-import Title from "../profile/Title/Title";
+import Title from "../Title/Title";
 
 export default function TransactionHistory({ history }) {
   return (

@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 
 const SakuraEffect = () => {
+  
   useEffect(() => {
     if (typeof window === "undefined") return;
 
     let stop, staticx;
     let img = new Image();
-    img.src = "/imgs/karin.png"; // Thay đường dẫn ảnh hoa sakura
+    img.src = "/imgs/11808a.png"; // Thay đường dẫn ảnh hoa sakura
 
     function Sakura(x, y, s, r, fn) {
       this.x = x;
