@@ -3,7 +3,6 @@ import { FileUploaderRegular } from "@uploadcare/react-uploader/next";
 import "@uploadcare/react-uploader/core.css";
 import PostsList from "@/components/Posts/PostsList";
 export default function Home() {
-  
   return (
     <>
       {/* <FileUploaderRegular
