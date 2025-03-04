@@ -1,6 +1,7 @@
 "use client";
 import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import MainLayout from "./main";
 import useConfig from "@/hook/useConfig";
 

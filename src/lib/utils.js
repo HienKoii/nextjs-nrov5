@@ -21,3 +21,6 @@ export const formatStatusCard = (statusCode) => {
 
   return responseMessages[statusCode] || "Mã trạng thái không hợp lệ";
 };
+export const formatTextHtml = (text) => {
+  return text.replace(/\n/g, "<br>");
+};

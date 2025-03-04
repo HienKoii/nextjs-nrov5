@@ -4,9 +4,9 @@ import { useParams } from "next/navigation";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Col, Image, Row } from "react-bootstrap";
-import { formatTime } from "@/lib/utils";
+import { formatTextHtml, formatTime } from "@/lib/utils";
 
-export default function PostPage() {
+export default function PostIdPage() {
   const { id } = useParams();
 
   const [post, setPost] = useState(null);
@@ -31,7 +31,7 @@ export default function PostPage() {
 
   return (
     <div>
-      <Title title={post?.tieude ? post?.tieude : "Bài viết"} color={"warning"} />
+      <Title title={`Chi tiết bài viết`} />
 
       {loading ? (
         <p className="text-center text-warning">Đang tải bài viết...</p>
@@ -48,11 +48,23 @@ export default function PostPage() {
 
           <Col xs={10} md={11}>
             <div className="post-item">
-              <h4 className="text-warning">{post?.tieude}</h4>
-              <hr />
-              <p className="text-black" style={{ minHeight: "200px" }}>
-                {post.noidung}
-              </p>
+              <div className="hk-flex-x gap-2">
+                <h4 className="text-primary m-0 fs-5">{post?.tieude}</h4>
+                <div>
+                  {post?.hot ? <Image src="/imgs/hot.gif" alt="hot" width={28} /> : null}
+                  {post?.new ? <Image src="/imgs/new.gif" alt="new" width={28} /> : null}
+                </div>
+              </div>
+              <hr className="mt-2" />
+              <div className="mt-1" dangerouslySetInnerHTML={{ __html: formatTextHtml(post?.noidung) }} />
+              {post?.image &&
+                JSON.parse(post?.image)?.map((item, index) => {
+                  return (
+                    <div key={index} className="hk-flex mt-1">
+                      <Image src={item} alt={`img-${index}`} className="w-100" style={{borderRadius:"12px"}} />
+                    </div>
+                  );
+                })}
               <hr className="mt-0 mb-1" />
               <p className="text-primary fst-italic" style={{ fontSize: "12px" }}>
                 {formatTime(post?.created_at)}
