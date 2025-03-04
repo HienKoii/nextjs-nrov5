@@ -11,13 +11,13 @@ export default function PostsItem({ post }) {
         </div>
         <div>
           <div className="hk-flex-x gap-2">
-            <Link href={`/post/${post?.id}`} className="fw-semibold text-primary text-uppercase" style={{ fontSize: "12px" }}>
-              {post?.tieude}
+            <Link href={`/post/${post?.id}`} className="text-primary text-uppercase" style={{ display: "inline" }}>
+              <span style={{ fontSize: "12px" }} className="fw-semibold me-1">
+                {post?.tieude}
+              </span>
+              {post?.hot ? <Image src="/imgs/hot.gif" alt="hot" width={24} style={{ verticalAlign: "middle" }} /> : null}
+              {post?.new ? <Image src="/imgs/new.gif" alt="new" width={24} style={{ verticalAlign: "middle" }} /> : null}
             </Link>
-            <div className="hk-flex gap-2">
-              {post?.hot ? <Image src="/imgs/hot.gif" alt="hot" width={24} /> : null}
-              {post?.new ? <Image src="/imgs/new.gif" alt="new" width={24} /> : null}
-            </div>
           </div>
           <div style={{ fontSize: "12px" }}>
             Đã đăng bởi <span className="text-danger fw-bold me-1">{post?.username}</span>|<span className="ms-1 text-primary">{formatTime(post?.created_at)}</span>

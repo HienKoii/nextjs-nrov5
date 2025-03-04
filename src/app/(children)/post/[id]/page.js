@@ -47,12 +47,15 @@ export default function PostIdPage() {
           </Col>
 
           <Col xs={10} md={11} className="p-0">
-            <div className="post-item">
-              <div className="hk-flex-x gap-2">
-                <h4 className="text-primary m-0 fs-5">{post?.tieude}</h4>
-                {post?.hot ? <Image src="/imgs/hot.gif" alt="hot" width={28} /> : null}
-                {post?.new ? <Image src="/imgs/new.gif" alt="new" width={28} /> : null}
+            <div className="post-item p-1">
+              <div className="text-primary text-uppercase" style={{ display: "inline" }}>
+                <span style={{ fontSize: "12px" }} className="fw-semibold me-1">
+                  {post?.tieude}
+                </span>
+                {post?.hot ? <Image src="/imgs/hot.gif" alt="hot" width={24} style={{ verticalAlign: "middle" }} /> : null}
+                {post?.new ? <Image src="/imgs/new.gif" alt="new" width={24} style={{ verticalAlign: "middle" }} /> : null}
               </div>
+
               <hr className="mt-2" />
               <div className="mt-1" dangerouslySetInnerHTML={{ __html: formatTextHtml(post?.noidung) }} />
               {post?.image &&
