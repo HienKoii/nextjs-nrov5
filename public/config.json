@@ -26,17 +26,17 @@
     "download": [
         {
             "type": 0,
-            "link": "/imgs/logo.png",
+            "link": "/imgs/ngocronglau.ipa",
             "content": "Phiên bản dành cho iphone. <br/>- File .ipa"
         },
         {
             "type": 1,
-            "link": "/files/aro.apk",
+            "link": "/files/nrolaunew.apk",
             "content": "Phiên bản dành cho Android. <br/>- File .apk"
         },
         {
             "type": 2,
-            "link": "/files/nroaro.rar",
+            "link": "/files/ngocronglau.rar",
             "content": "Phiên bản dành cho Windows (pc). <br/>- File .rar, .zip"
         },
         {
