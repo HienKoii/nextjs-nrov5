@@ -37,7 +37,7 @@ export default function PostIdPage() {
         <p className="text-center text-warning">Đang tải bài viết...</p>
       ) : post ? (
         <Row>
-          <Col xs={2} md={1}>
+          <Col xs={2} md={1} className="p-0 pe-2">
             <div className="text-center">
               <Image src="/imgs/avt.gif" alt="post" style={{ width: "100%" }} />
             </div>
@@ -46,14 +46,12 @@ export default function PostIdPage() {
             </p>
           </Col>
 
-          <Col xs={10} md={11}>
+          <Col xs={10} md={11} className="p-0">
             <div className="post-item">
               <div className="hk-flex-x gap-2">
                 <h4 className="text-primary m-0 fs-5">{post?.tieude}</h4>
-                <div>
-                  {post?.hot ? <Image src="/imgs/hot.gif" alt="hot" width={28} /> : null}
-                  {post?.new ? <Image src="/imgs/new.gif" alt="new" width={28} /> : null}
-                </div>
+                {post?.hot ? <Image src="/imgs/hot.gif" alt="hot" width={28} /> : null}
+                {post?.new ? <Image src="/imgs/new.gif" alt="new" width={28} /> : null}
               </div>
               <hr className="mt-2" />
               <div className="mt-1" dangerouslySetInnerHTML={{ __html: formatTextHtml(post?.noidung) }} />
@@ -61,7 +59,7 @@ export default function PostIdPage() {
                 JSON.parse(post?.image)?.map((item, index) => {
                   return (
                     <div key={index} className="hk-flex mt-1">
-                      <Image src={item} alt={`img-${index}`} className="w-100" style={{borderRadius:"12px"}} />
+                      <Image src={item} alt={`img-${index}`} className="w-100" style={{ borderRadius: "12px" }} />
                     </div>
                   );
                 })}

@@ -38,7 +38,7 @@ export default function PostsList() {
         <Button
           as={Link}
           href="post/create" //
-          variant="light"
+          variant="success"
           size="sm"
         >
           <FontAwesomeIcon icon={faEdit} /> Đăng bài

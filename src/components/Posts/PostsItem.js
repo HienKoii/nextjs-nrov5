@@ -5,19 +5,18 @@ import { Image } from "react-bootstrap";
 export default function PostsItem({ post }) {
   return (
     <>
-    
       <div className="post-item gap-2 d-flex align-items-center my-2">
         <div className="post-image">
           <Image src="/imgs/avt.gif" alt="post" width={52} />
         </div>
         <div>
           <div className="hk-flex-x gap-2">
-            <Link href={`/post/${post?.id}`} className="fw-bold text-primary text-uppercase">
+            <Link href={`/post/${post?.id}`} className="fw-semibold text-primary text-uppercase" style={{ fontSize: "12px" }}>
               {post?.tieude}
             </Link>
             <div className="hk-flex gap-2">
-              {post?.hot ? <Image src="/imgs/hot.gif" alt="hot" width={28} /> : null}
-              {post?.new ? <Image src="/imgs/new.gif" alt="new" width={28} /> : null}
+              {post?.hot ? <Image src="/imgs/hot.gif" alt="hot" width={24} /> : null}
+              {post?.new ? <Image src="/imgs/new.gif" alt="new" width={24} /> : null}
             </div>
           </div>
           <div style={{ fontSize: "12px" }}>
