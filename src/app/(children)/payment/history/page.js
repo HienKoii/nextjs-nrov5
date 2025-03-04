@@ -36,5 +36,5 @@ export default function PaymentHistoryPage() {
     return <p className="text-center text-warning">Đang tải dữ liệu...</p>;
   }
 
-  return <div>{history.length > 0 ? <TransactionHistory history={history} /> : <p>Không có dữ liệu lịch sử</p>}</div>;
+  return <div>{history.length > 0 ? <TransactionHistory history={history} /> : <p className="text-center text-warning">Không có dữ liệu lịch sử</p>}</div>;
 }
