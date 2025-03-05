@@ -19,7 +19,7 @@ export async function POST(request) {
     }
 
     // Tạo JWT Token
-    const token = jwt.sign({ id: user[0].id, username: user[0].username }, SECRET_KEY, { expiresIn: process.env.JWT_EXPIRES_IN });
+    const token = jwt.sign({ id: user[0].id, username: user[0].username, is_admin: user[0].is_admin }, SECRET_KEY, { expiresIn: process.env.JWT_EXPIRES_IN });
 
     // Lấy thông tin đầy đủ của user
     const userData = await getUserById(user[0].id);

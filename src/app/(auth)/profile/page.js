@@ -28,14 +28,17 @@ export default function ProfilePage() {
   return (
     <div>
       <Row className="mb-3">
-        <Col className="hk-flex">
+        <Col className="hk-flex gap-2">
           {tabs.map((tab) => (
-            <Button key={tab.key} variant={activeTab === tab.key ? "success active" : "success"} onClick={() => setActiveTab(tab.key)} className="me-2">
+            <Button key={tab.key} variant={activeTab === tab.key ? "success active" : "success"} onClick={() => setActiveTab(tab.key)}>
               {tab.label}
             </Button>
           ))}
           <Button variant="success" onClick={() => router.push("/payment/history")}>
             Lịch sử GD
+          </Button>
+          <Button variant="success" onClick={() => router.push("/admin")}>
+            Admin
           </Button>
         </Col>
       </Row>

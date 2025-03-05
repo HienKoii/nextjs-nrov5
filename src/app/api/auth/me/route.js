@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import { getUserById } from "@/app/Service/accountService";
 
-const SECRET_KEY = process.env.JWT_SECRET || "";
 
 export async function GET(req) {
   try {
@@ -10,7 +9,7 @@ export async function GET(req) {
     if (!authHeader) return NextResponse.json({ message: "Không có token" }, { status: 401 });
 
     const token = authHeader.split(" ")[1];
-    const decoded = jwt.verify(token, SECRET_KEY);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Lấy thông tin user từ ID
     const userData = await getUserById(decoded.id);

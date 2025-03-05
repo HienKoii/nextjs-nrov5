@@ -72,6 +72,11 @@ a {
 .btn-link:hover {
   opacity: 0.8;
 }
+.nav-link.active {
+  background-color: #006d5a !important;
+  border-color: gold !important;
+  color: gold !important;
+}
 .card {
   background-color: #007e70 !important;
   border-radius: 1rem !important;

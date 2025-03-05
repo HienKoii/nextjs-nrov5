@@ -9,11 +9,12 @@ export async function POST(req) {
       return NextResponse.json({ message: "Vui lòng đăng nhập" }, { status: 401 });
     }
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const { id, username } = decoded;
-    console.log('decoded', decoded)
+    const { is_admin, username } = decoded;
     const data = await req.json();
-    console.log("data", data);
-    // Lấy dữ liệu từ formData
+    
+    if (!is_admin) {
+      return NextResponse.json({ message: "Không có quyền truy cập" }, { status: 401 });
+    }
 
     // Kiểm tra các trường hợp thiếu dữ liệu
     if (!data.tieude || !data.noidung) {
