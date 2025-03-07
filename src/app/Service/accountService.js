@@ -20,7 +20,7 @@ export async function updateAccountBalance(accountId, value) {
     const totalMoney = value * (parseFloat(process.env.PROMO_RATE) || 1);
     const updateAccountQuery = `
       UPDATE account 
-      SET vnd = vnd + ?, tongnap = tongnap + ?, naptuan = naptuan + ? 
+      SET active = 1 , vnd = vnd + ?, tongnap = tongnap + ?, naptuan = naptuan + ? 
       WHERE id = ?
     `;
     await db.query(updateAccountQuery, [totalMoney, totalMoney, totalMoney, accountId]);
