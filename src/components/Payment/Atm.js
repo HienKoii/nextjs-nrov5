@@ -27,7 +27,7 @@ export default function PaymentAtm() {
   const handlePayment = () => {
     if (selectedValue) {
       setShowPayment(!showPayment);
-      router.push(`/payment/atm?amount=${selectedValue}&trans_id=${nanoid(5)}`);
+      router.push(`/payment/atm?amount=${selectedValue}`);
     }
   };
 

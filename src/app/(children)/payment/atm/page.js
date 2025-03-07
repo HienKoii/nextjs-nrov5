@@ -13,11 +13,8 @@ export default function PaymentAtmPage() {
   const searchParams = useSearchParams();
   const { config } = useConfig();
   const { user } = useUser();
-  const [isChecking, setIsChecking] = useState(true);
-  const [transactionSuccess, setTransactionSuccess] = useState(false);
 
   const amount = searchParams.get("amount");
-  const trans_id = searchParams.get("trans_id");
 
   // 🔥 Kiểm tra nếu chưa đăng nhập → Chuyển hướng về trang chủ
   useEffect(() => {
@@ -26,70 +23,27 @@ export default function PaymentAtmPage() {
     }
   }, []);
 
-  // 🔥 Lưu giao dịch khi trang được tải
-  useEffect(() => {
-    if (!user?.id || !amount || !trans_id) return;
-
-    const saveTransaction = async () => {
-      try {
-        const response = await axios.post("/api/payment/atm/create", {
-          user_id: user.id,
-          amount,
-          trans_id,
-        });
-
-        if (!response.data.success) {
-          setIsChecking(false);
-        }
-      } catch (error) {
-        console.error("❌ Lỗi khi lưu giao dịch:", error);
-      }
-    };
-
-    saveTransaction();
-  }, [user?.id, amount, trans_id]);
-
-  // 🔥 Kiểm tra giao dịch tự động
-  const checkTransaction = useCallback(async () => {
-    if (!amount || !user?.id || !trans_id || transactionSuccess) return;
-
+  const fetchAutoDeposit = async () => {
     try {
-      const response = await axios.get("https://api.sieuthicode.net/historyapivcbv2/851601caa8b57859fc0e8b61cdcb2a78");
-      const data = response.data;
-
-      if (data.status === "success" && Array.isArray(data.transactions)) {
-        const transaction = data.transactions.find(
-          (t) => t.description.includes(user.id) && t.description.includes(trans_id)
-        );
-
-        if (transaction) {
-          await axios.post("/api/payment/atm/update", {
-            trans_id,
-            amount: transaction.amount,
-            user_id: user.id,
-          });
-
-          setTransactionSuccess(true);
-          alert(`🎉 Nạp tiền thành công! Số tiền: ${transaction.amount} VND`);
-          setIsChecking(false);
-        }
-      }
+      const response = await axios.post("/api/payment/atm");
+      console.log("response.data", response.data);
     } catch (error) {
-      console.error("❌ Lỗi khi kiểm tra giao dịch:", error);
+      console.error("Lỗi auto deposit:", error);
     }
-  }, [amount, user?.id, trans_id, transactionSuccess]);
+  };
 
   useEffect(() => {
-    const interval = setInterval(checkTransaction, 20000);
-    const timeout = setTimeout(() => {
-      alert("⚠ Nếu sau 10 phút chưa thấy tiền vào tài khoản, vui lòng liên hệ Admin.");
-    }, 10 * 60 * 1000);
+    // Gọi API ngay khi component mount
+    fetchAutoDeposit();
 
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timeout);
-    };
-  }, [checkTransaction]);
+    // Đặt interval gọi API mỗi 15 giây
+    const interval = setInterval(() => {
+      fetchAutoDeposit();
+    }, 15000 * 2);
+
+    // Dọn dẹp interval khi component unmount
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div>
@@ -114,19 +68,13 @@ export default function PaymentAtmPage() {
             </tr>
             <tr>
               <td className="text-white">Nội dung</td>
-              <td className="text-white">
-                {user?.id} {trans_id}
-              </td>
+              <td className="text-white">naptien {user?.id}</td>
             </tr>
           </tbody>
         </Table>
         <div>
           <p className="fs-5">Quét mã để thanh toán</p>
-          <Image
-            src={`https://img.vietqr.io/image/${config?.payment?.atm?.key}-${config?.payment?.atm?.stk}-compact.png?amount=${amount}&addInfo=${user?.id}%20${trans_id}`}
-            alt="qr"
-            width={250}
-          />
+          <Image src={`https://img.vietqr.io/image/${config?.payment?.atm?.key}-${config?.payment?.atm?.stk}-compact.png?amount=${amount}&addInfo=$naptien%20${user?.id}`} alt="qr" width={250} />
         </div>
         <div className="hk-flex p-2 mt-2">
           <Link href={"/payment/history"} className="text-warning">
