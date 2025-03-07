@@ -55,10 +55,13 @@ export default function PaymentAtmPage() {
         console.log("Lấy danh sách lịch sử giao dich: ", response.data);
 
         if (data.status === "success" && Array.isArray(data.transactions)) {
-          // 🔥 Kiểm tra transactions có phải mảng không
-          const transaction = data.transactions.find((t) => t.description.includes(searchParams.get("trans_id")));
+          // 🔥 Kiểm tra description chứa cả userID và trans_id
+          const transaction = data.transactions.find((t) => {
+            return t.description.includes(user?.id) && t.description.includes(searchParams.get("trans_id"));
+          });
 
           if (transaction) {
+            console.log("✅ Giao dịch hợp lệ:", transaction);
             const updateAtm = await axios.post("/api/payment/atm/update", {
               trans_id: searchParams.get("trans_id"),
               amount: transaction.amount,
@@ -76,7 +79,7 @@ export default function PaymentAtmPage() {
       }
     };
 
-    const interval = setInterval(checkTransaction, 10000);
+    const interval = setInterval(checkTransaction, 20000);
     const timeout = setTimeout(() => {
       alert("⚠ Nếu sau 10 phút chưa thấy tiền vào tài khoản, vui lòng liên hệ Admin.");
     }, 10 * 60 * 1000);
