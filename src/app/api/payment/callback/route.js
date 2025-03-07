@@ -1,3 +1,4 @@
+import { updateAccountBalance } from "@/app/Service/accountService";
 import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
@@ -40,26 +41,21 @@ export async function GET(request) {
       SET status = ?, message = ?, declared_value = ?, value = ?, amount = ?, code = ?, serial = ?, telco = ?
       WHERE request_id = ?
     `;
+    const valuesUpdateNapThe = [status, message, declared_value, value, amount, code, serial, telco, request_id];
 
-    const result = await db.query(updateNaptheQuery, [status, message, declared_value, value, amount, code, serial, telco, request_id]);
+    const result = await db.query(updateNaptheQuery, valuesUpdateNapThe);
 
     if (result.affectedRows === 0) {
       console.error("Cập nhật napthe thất bại");
       return NextResponse.json({ error: "Update failed napthe" }, { status: 500 });
     }
 
-    // Nếu `status` là 1 hoặc 2, cập nhật trường `vnd` trong bảng `account`
+    // Nếu `status` là 1 hoặc 2, cập nhật số dư tài khoản bằng hàm updateAccountBalance
     if (status === 1 || status === 2) {
-      const totalMoney = value * (parseFloat(process.env.PROMO_RATE) || 1);
-      const updateAccountQuery = `
-        UPDATE account 
-        SET vnd = vnd + ?, tongnap = tongnap + ?, naptuan = naptuan + ? 
-        WHERE id = ?
-      `;
-      await db.query(updateAccountQuery, [totalMoney, totalMoney, totalMoney, accountId]);
-
-      console.log(`Tài khoản ${accountId} vừa nạp ${totalMoney} VNĐ thành công!`);
+      const updatedUser = await updateAccountBalance(accountId, value);
+      console.log(`Tài khoản ${accountId} vừa nạp ${value} VNĐ thành công!`, updatedUser);
     }
+
     console.log("Xử lý callback nạp thẻ thành công!");
     return NextResponse.json({ success: true, message: "Record updated successfully" });
   } catch (error) {

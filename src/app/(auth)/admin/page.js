@@ -16,30 +16,44 @@ export default function AdminPage() {
     }
   }, [token, user, router]);
 
+  const listNavItem = [
+    {
+      key: 0,
+      title: "Cộng VNĐ",
+      tabContent: <TabOne />,
+    },
+    {
+      key: 1,
+      title: "tow",
+      tabContent: <p>Nội dung key 2</p>,
+    },
+  ];
   return (
     <div>
-      <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+      <Tab.Container id="left-tabs-example" defaultActiveKey={listNavItem[0].key}>
         <Row>
           <Col sm={3}>
             <Nav variant="pills" className="flex-column">
-              <Nav.Item>
-                <Nav.Link eventKey="first" className="text-warning">
-                  Tab 1
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link eventKey="second" className="text-warning">
-                  Tab 2
-                </Nav.Link>
-              </Nav.Item>
+              {listNavItem.map((item, index) => {
+                return (
+                  <Nav.Item key={index}>
+                    <Nav.Link eventKey={item.key} className="text-warning">
+                      {item.title}
+                    </Nav.Link>
+                  </Nav.Item>
+                );
+              })}
             </Nav>
           </Col>
           <Col sm={9}>
             <Tab.Content>
-              <Tab.Pane eventKey="first">
-                <TabOne />
-              </Tab.Pane>
-              <Tab.Pane eventKey="second">Second tab content</Tab.Pane>
+              {listNavItem.map((item, index) => {
+                return (
+                  <Tab.Pane key={index} eventKey={item.key}>
+                    {item.tabContent}
+                  </Tab.Pane>
+                );
+              })}
             </Tab.Content>
           </Col>
         </Row>

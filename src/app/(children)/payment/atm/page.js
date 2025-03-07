@@ -2,23 +2,90 @@
 import { useUser } from "@/context/UserContext";
 import useConfig from "@/hook/useConfig";
 import { formatCurrency } from "@/lib/utils";
+import axios from "axios";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Image, Table } from "react-bootstrap";
 
 export default function PaymentAtmPage() {
   const router = useRouter();
+  const [isChecking, setIsChecking] = useState(true);
   const searchParams = useSearchParams();
   const { config } = useConfig();
   const { user } = useUser();
 
-  const token = localStorage.getItem("token");
   useEffect(() => {
-    if (!token) {
+    const storedToken = localStorage.getItem("token");
+    if (!storedToken) {
       router.push("/");
     }
-  }, [token]);
+  }, []); // 🔥 Đọc localStorage chỉ khi component mounted
+
+  useEffect(() => {
+    if (!user?.id || !searchParams.get("amount") || !searchParams.get("trans_id")) return;
+
+    const saveTransaction = async () => {
+      try {
+        const response = await axios.post("/api/payment/atm/create", {
+          user_id: user.id,
+          amount: searchParams.get("amount"),
+          trans_id: searchParams.get("trans_id"),
+        });
+        console.log("Xử lý lưu nạp atm: ", response);
+
+        if (!response.data.success) {
+          setIsChecking(false);
+        }
+      } catch (error) {
+        console.error("Lỗi khi lưu giao dịch:", error);
+      }
+    };
+
+    saveTransaction();
+  }, [user?.id, searchParams]); // 🔥 Thêm user.id và searchParams vào dependencies
+
+  useEffect(() => {
+    if (!searchParams.get("amount")) return;
+
+    const checkTransaction = async () => {
+      try {
+        const response = await axios.get("https://api.sieuthicode.net/historyapiviettinv2/851601caa8b57859fc0e8b61cdcb2a78");
+        const data = response.data;
+        console.log("Lấy danh sách lịch sử giao dich: ", response.data);
+
+        if (data.status === "success" && Array.isArray(data.transactions)) {
+          // 🔥 Kiểm tra transactions có phải mảng không
+          const transaction = data.transactions.find((t) => t.description.includes(searchParams.get("trans_id")));
+
+          if (transaction) {
+            const updateAtm = await axios.post("/api/payment/atm/update", {
+              trans_id: searchParams.get("trans_id"),
+              amount: transaction.amount,
+              user_id: user?.id,
+            });
+            console.log("Xử lý cập nhật nạp atm: ", updateAtm);
+
+            setTransactionSuccess(true);
+            alert(`🎉 Nạp tiền thành công! Số tiền: ${transaction.amount} VND`);
+            setIsChecking(false);
+          }
+        }
+      } catch (error) {
+        console.error("Lỗi khi kiểm tra giao dịch:", error);
+      }
+    };
+
+    const interval = setInterval(checkTransaction, 10000);
+    const timeout = setTimeout(() => {
+      alert("⚠ Nếu sau 10 phút chưa thấy tiền vào tài khoản, vui lòng liên hệ Admin.");
+    }, 10 * 60 * 1000);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
+  }, [searchParams, user?.id]); // 🔥 Thêm dependencies tránh lỗi
 
   return (
     <div>
