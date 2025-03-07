@@ -5,9 +5,24 @@ import { updateAccountBalance } from "@/app/Service/accountService";
 
 export async function POST(req) {
   try {
+    // Gọi API lấy lịch sử giao dịch
     const response = await axios.get(`https://api.sieuthicode.net/historyapivcbv2/${process.env.TOKEN_ATM}`);
 
-    const transactions = response.data.transactions;
+    // Log dữ liệu API trả về để kiểm tra
+    console.log("📢 API Response Data:", response.data);
+
+    // Kiểm tra nếu `transactions` không tồn tại hoặc không phải là mảng
+    const transactions = response.data?.transactions;
+
+    if (!transactions) {
+      console.error("🚫 Lỗi: API không trả về dữ liệu giao dịch!");
+      return NextResponse.json({ message: "API không có dữ liệu giao dịch" }, { status: 500 });
+    }
+
+    if (!Array.isArray(transactions)) {
+      console.error("🚫 Lỗi: transactions không phải là một mảng!", transactions);
+      return NextResponse.json({ message: "Lỗi dữ liệu từ API" }, { status: 500 });
+    }
 
     let count = 0;
 
@@ -16,10 +31,11 @@ export async function POST(req) {
 
       if (type === "IN") {
         // Dùng regex để tìm ID user trong description (ví dụ: "naptien 611")
-        const match = description.match(/naptien (\d+)/);
+        const match = description?.match(/naptien (\d+)/);
 
         if (match) {
           const userId = parseInt(match[1], 10);
+          console.log(`🔍 Kiểm tra userId: ${userId}`);
 
           // Kiểm tra user có tồn tại không
           const user = await db.query("SELECT id FROM account WHERE id = ?", [userId]);
@@ -29,6 +45,8 @@ export async function POST(req) {
             const checkExist = await db.query("SELECT * FROM deposits WHERE transaction_id = ?", [transactionID]);
 
             if (checkExist[0].length === 0) {
+              console.log(`✅ Giao dịch ${transactionID} hợp lệ, tiến hành nạp tiền.`);
+
               // Cộng tiền vào tài khoản người dùng
               await updateAccountBalance(userId, amount);
 
@@ -37,10 +55,10 @@ export async function POST(req) {
 
               count++;
             } else {
-              console.log("⚠️ Giao dịch đã được xử lý trước đó, bỏ qua.");
+              console.log(`⚠️ Giao dịch ${transactionID} đã tồn tại, bỏ qua.`);
             }
           } else {
-            console.log("🚫 User không tồn tại, bỏ qua giao dịch.");
+            console.log(`🚫 User ID ${userId} không tồn tại, bỏ qua giao dịch.`);
           }
         } else {
           console.log("🚫 Không tìm thấy ID user trong mô tả giao dịch.");

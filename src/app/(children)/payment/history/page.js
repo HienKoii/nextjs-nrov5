@@ -35,6 +35,28 @@ export default function PaymentHistoryPage() {
     fetchHistory();
   }, []);
 
+  const fetchAutoDeposit = async () => {
+    try {
+      const response = await axios.post("/api/payment/atm");
+      console.log("response.data", response.data);
+    } catch (error) {
+      console.error("Lỗi auto deposit:", error);
+    }
+  };
+
+  useEffect(() => {
+    // Gọi API ngay khi component mount
+    fetchAutoDeposit();
+
+    // Đặt interval gọi API mỗi 15 giây
+    const interval = setInterval(() => {
+      fetchAutoDeposit();
+    }, 15000 * 2);
+
+    // Dọn dẹp interval khi component unmount
+    return () => clearInterval(interval);
+  }, []);
+
   if (loading) {
     return <p className="text-center text-warning">Đang tải dữ liệu...</p>;
   }
