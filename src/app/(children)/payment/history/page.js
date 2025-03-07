@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 export default function PaymentHistoryPage() {
   const router = useRouter();
   const [history, setHistory] = useState([]);
+  const [historyAtm, setHistoryAtm] = useState([]);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,6 +21,7 @@ export default function PaymentHistoryPage() {
           });
           console.log("Lấy lịch sử nạp thẻ:", response.data);
           setHistory(response.data.history);
+          setHistoryAtm(response.data.historyAtm);
         } else {
           router.push("/");
         }
@@ -36,5 +39,5 @@ export default function PaymentHistoryPage() {
     return <p className="text-center text-warning">Đang tải dữ liệu...</p>;
   }
 
-  return <div>{history.length > 0 ? <TransactionHistory history={history} /> : <p className="text-center text-warning">Không có dữ liệu lịch sử</p>}</div>;
+  return <div>{<TransactionHistory history={history} historyAtm={historyAtm} />}</div>;
 }

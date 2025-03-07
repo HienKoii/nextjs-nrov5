@@ -18,10 +18,10 @@ export async function GET(req) {
 
   try {
     const { id } = decoded;
-    console.log('id', id)
     const [history] = await db.query(`SELECT * FROM napthe WHERE account_id = ? ORDER BY created_at DESC`, [id]);
+    const [historyAtm] = await db.query(`SELECT * FROM deposits WHERE user_id = ? ORDER BY created_at DESC`, [id]);
 
-    return NextResponse.json({ history }, { status: 200 });
+    return NextResponse.json({ history, historyAtm }, { status: 200 });
   } catch (error) {
     console.error("Error fetching napthe history:", error);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
