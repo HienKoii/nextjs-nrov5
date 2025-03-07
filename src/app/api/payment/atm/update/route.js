@@ -1,6 +1,6 @@
+import { updateAccountBalance } from "@/app/Service/accountService";
 import db from "@/lib/db";
 import { NextResponse } from "next/server";
-import { updateAccountBalance } from "@/lib/account"; // Import hàm cập nhật số dư
 
 export async function POST(req) {
   try {
