@@ -50,7 +50,7 @@ export default function PaymentAtmPage() {
 
     const checkTransaction = async () => {
       try {
-        const response = await axios.get("https://api.sieuthicode.net/historyapiviettinv2/851601caa8b57859fc0e8b61cdcb2a78");
+        const response = await axios.get("https://api.sieuthicode.net/historyapivcbv2/851601caa8b57859fc0e8b61cdcb2a78");
         const data = response.data;
         console.log("Lấy danh sách lịch sử giao dich: ", response.data);
 
