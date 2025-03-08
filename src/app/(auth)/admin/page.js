@@ -19,9 +19,9 @@ export default function AdminPage() {
   }, [token, user, router]);
 
   const stats = [
-    { title: "Tổng Account", value: 5000, color: "primary", link: "/details/accounts" },
-    { title: "Tổng Player", value: 3000, color: "success", link: "/details/players" },
-    { title: "Doanh thu", value: "1,000,000 đ", color: "warning", link: "/details/revenue" },
+    { title: "Tổng Account", value: 5000, color: "primary", link: "account" },
+    { title: "Tổng Player", value: 3000, color: "success", link: "player" },
+    { title: "Doanh thu", value: "1,000,000 đ", color: "warning", link: "revenue" },
   ];
 
   const listNavItem = [
@@ -38,7 +38,7 @@ export default function AdminPage() {
                     <p className="text-white">{stat.title}</p>
                     <TextDivider text={stat.value} color={"black"} />
                   </div>
-                  <Link href={stat.link} passHref>
+                  <Link href={`/admin/${stat.link}`} passHref>
                     <Button variant={"success"} className="mt-auto">
                       Xem chi tiết
                     </Button>

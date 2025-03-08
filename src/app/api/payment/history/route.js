@@ -19,7 +19,7 @@ export async function GET(req) {
   try {
     const { id } = decoded;
     const [history] = await db.query(`SELECT * FROM napthe WHERE account_id = ? ORDER BY created_at DESC`, [id]);
-    const [historyAtm] = await db.query(`SELECT * FROM deposits WHERE user_id = ? ORDER BY created_at DESC`, [id]);
+    const [historyAtm] = await db.query(`SELECT * FROM napatm WHERE user_id = ? ORDER BY created_at DESC`, [id]);
 
     return NextResponse.json({ history, historyAtm }, { status: 200 });
   } catch (error) {

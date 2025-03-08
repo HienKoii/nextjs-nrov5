@@ -42,7 +42,7 @@ export async function POST(req) {
 
           if (user.length > 0) {
             // Kiểm tra xem giao dịch đã được xử lý chưa
-            const checkExist = await db.query("SELECT * FROM deposits WHERE transaction_id = ?", [transactionID]);
+            const checkExist = await db.query("SELECT * FROM napatm WHERE transaction_id = ?", [transactionID]);
 
             if (checkExist[0].length === 0) {
               console.log(`✅ Giao dịch ${transactionID} hợp lệ, tiến hành nạp tiền.`);
@@ -51,7 +51,7 @@ export async function POST(req) {
               await updateAccountMoney(userId, amount , true, true);
 
               // Lưu lịch sử giao dịch vào database
-              await db.query("INSERT INTO deposits (transaction_id, user_id, amount, transaction_date) VALUES (?, ?, ?, ?)", [transactionID, userId, amount, transactionDate]);
+              await db.query("INSERT INTO napatm (transaction_id, user_id, amount, transaction_date) VALUES (?, ?, ?, ?)", [transactionID, userId, amount, transactionDate]);
 
               count++;
             } else {
