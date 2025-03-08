@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import db from "@/lib/db"; // Kết nối database MySQL
 import axios from "axios";
-import { updateAccountBalance } from "@/app/Service/accountService";
+import { updateAccountMoney } from "@/app/Service/accountService";
 
 export async function POST(req) {
   try {
@@ -48,7 +48,7 @@ export async function POST(req) {
               console.log(`✅ Giao dịch ${transactionID} hợp lệ, tiến hành nạp tiền.`);
 
               // Cộng tiền vào tài khoản người dùng
-              await updateAccountBalance(userId, amount);
+              await updateAccountMoney(userId, amount , true, true);
 
               // Lưu lịch sử giao dịch vào database
               await db.query("INSERT INTO deposits (transaction_id, user_id, amount, transaction_date) VALUES (?, ?, ?, ?)", [transactionID, userId, amount, transactionDate]);

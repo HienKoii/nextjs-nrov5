@@ -1,4 +1,5 @@
 import db from "@/lib/db";
+import { createHistory } from "./historyService";
 
 export async function getUserById(userId) {
   const [user] = await db.query("SELECT * FROM account WHERE id = ?", [userId]);
@@ -14,23 +15,53 @@ export async function getUserById(userId) {
   };
 }
 
-// Hàm cập nhật số dư tài khoản và trả về thông tin sau khi cập nhật
-export async function updateAccountBalance(accountId, value) {
+export async function updateAccountMoney(accountId, value, isActive, isTopUp) {
   try {
     const totalMoney = value * (parseFloat(process.env.PROMO_RATE) || 1);
+
+    // Xây dựng câu lệnh SQL động dựa trên isActive và isTopUp
+    const updateFields = [`vnd = vnd + ?`];
+
+    if (isTopUp) {
+      updateFields.push(`tongnap = tongnap + ?`, `naptuan = naptuan + ?`);
+    }
+
+    if (isActive) {
+      updateFields.push(`active = 1`);
+    }
+
     const updateAccountQuery = `
       UPDATE account 
-      SET active = 1 , vnd = vnd + ?, tongnap = tongnap + ?, naptuan = naptuan + ? 
+      SET ${updateFields.join(", ")}
       WHERE id = ?
     `;
-    await db.query(updateAccountQuery, [totalMoney, totalMoney, totalMoney, accountId]);
+
+    // Chuẩn bị giá trị tham số cho câu lệnh SQL
+    const queryValues = [totalMoney];
+
+    if (isTopUp) {
+      queryValues.push(totalMoney, totalMoney);
+    }
+
+    queryValues.push(accountId);
+
+    await db.query(updateAccountQuery, queryValues);
 
     console.log(`Tài khoản ${accountId} vừa nạp ${totalMoney} VNĐ thành công!`);
 
     // Lấy thông tin tài khoản sau khi cập nhật
     const [updatedUser] = await db.query("SELECT * FROM account WHERE id = ?", [accountId]);
 
-    return updatedUser.length > 0 ? updatedUser[0] : null;
+    if (updatedUser.length > 0) {
+      const user = updatedUser[0];
+
+      // Ghi lại lịch sử giao dịch
+      await createHistory(user.username, totalMoney, `${user.username} vừa được cộng tiền trên web thành công!`);
+
+      return user;
+    }
+
+    return null;
   } catch (error) {
     console.error(`Lỗi khi cập nhật số dư tài khoản ${accountId}:`, error);
     throw error;

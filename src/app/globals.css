@@ -86,6 +86,20 @@ a {
 .text-warning {
   text-shadow: -1px -1px 0 #7b5d20, 1px -1px 0 #7b5d20, -1px 1px 0 #7b5d20, 1px 1px 0 #7b5d20;
 }
+
+.custom-card {
+  height: 100%; /* Giúp tất cả Card có chiều cao bằng nhau */
+  border-width: 3px !important; /* Viền dày hơn */
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-card .card-body {
+  flex-grow: 1; /* Đảm bảo nội dung dàn đều */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Đưa button xuống dưới */
+}
 .hk.modal.show .modal-content {
   border-color: #ffb473 !important;
   border-color: #198754;

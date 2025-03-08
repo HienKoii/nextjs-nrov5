@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import db from "@/lib/db";
 import jwt from "jsonwebtoken";
+import { updateAccountMoney } from "@/app/Service/accountService";
 
 export async function POST(req) {
   const { amount, identifier, isUsername } = await req.json();
@@ -14,11 +15,10 @@ export async function POST(req) {
   if (!authHeader) return NextResponse.json({ message: "Không có token" }, { status: 401 });
 
   const token = authHeader.split(" ")[1];
-  const decoded = jwt.verify(token,  process.env.JWT_SECRET);
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
   try {
-    const { id, is_admin } = decoded;
-    console.log("is_admin", is_admin);
+    const { is_admin } = decoded;
     if (!is_admin) {
       return NextResponse.json({ message: "Không có quyền truy cập" }, { status: 403 });
     }
@@ -30,18 +30,8 @@ export async function POST(req) {
       return NextResponse.json({ message: "Không tìm thấy người dùng" }, { status: 404 });
     }
 
-    const totalMoney = numericAmount * (parseFloat(process.env.PROMO_RATE) || 1);
-    const updateAccountQuery = `
-    UPDATE account 
-    SET vnd = vnd + ?, tongnap = tongnap + ?, naptuan = naptuan + ? 
-    WHERE id = ?
-  `;
-    await db.query(updateAccountQuery, [totalMoney, totalMoney, totalMoney, user[0].id]);
-
-    // Lưu lịch sử giao dịch vào bảng history_gold
-    const sqlTaoLichSuMua = "INSERT INTO history_gold (name, gold, lydo) VALUES (?, ?, ?)";
-    const valuesTaoLichSuMua = [user[0].username, totalMoney, `${user[0].username} vừa được cộng tiền trên web thành công!`];
-    await db.query(sqlTaoLichSuMua, valuesTaoLichSuMua);
+    // Cộng tiền vào tài khoản người dùng
+    await updateAccountMoney(user[0].id, numericAmount, false, false);
 
     return NextResponse.json({ message: `Đã cộng ${numericAmount} VND vào tài khoản của ${identifier}` }, { status: 200 });
   } catch (error) {
