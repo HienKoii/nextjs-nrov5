@@ -22,7 +22,7 @@ export function UserProvider({ children }) {
         const response = await axios.get("/api/auth/me", {
           headers: { Authorization: `Bearer ${token}` },
         });
-        console.log("response", response);
+
         setUser(response.data);
       } catch (error) {
         localStorage.removeItem("token"); // Xóa token nếu không hợp lệ

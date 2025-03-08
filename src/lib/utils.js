@@ -24,3 +24,6 @@ export const formatStatusCard = (statusCode) => {
 export const formatTextHtml = (text) => {
   return text.replace(/\n/g, "<br>");
 };
+export const getToken = () => {
+  return typeof window !== "undefined" ? localStorage.getItem("token") : null;
+};

@@ -1,6 +1,5 @@
 import db from "@/lib/db";
 import { createHistory } from "./historyService";
-
 export async function getUserById(userId) {
   const [user] = await db.query("SELECT * FROM account WHERE id = ?", [userId]);
   if (!user || user.length === 0) return null;
@@ -12,6 +11,23 @@ export async function getUserById(userId) {
     password: "đã che ^^",
     name: pl[0]?.name || null,
     gender: pl[0]?.gender || null,
+  };
+}
+
+export async function getAllUsers(page = 1, limit = 10) {
+  const offset = (page - 1) * limit;
+
+  // Lấy danh sách user với phân trang
+  const [users] = await db.query("SELECT id, username, email, vnd, created_at FROM account ORDER BY created_at DESC LIMIT ? OFFSET ?", [limit, offset]);
+
+  // Đếm tổng số user để hỗ trợ phân trang
+  const [[{ total }]] = await db.query("SELECT COUNT(*) AS total FROM account");
+
+  return {
+    users,
+    total,
+    page,
+    totalPages: Math.ceil(total / limit),
   };
 }
 

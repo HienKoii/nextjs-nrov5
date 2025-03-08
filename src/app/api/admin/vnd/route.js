@@ -1,21 +1,14 @@
 import { NextResponse } from "next/server";
 import db from "@/lib/db";
-import jwt from "jsonwebtoken";
 import { updateAccountMoney } from "@/app/Service/accountService";
-
+import { verifyToken } from "@/app/Service/tokenService";
 export async function POST(req) {
   const { amount, identifier, isUsername } = await req.json();
+  const numericAmount = Number(amount); // Chuyển đổi amount thành số
 
-  const numericAmount = Number(amount); // Chuyển đổi amount thành number
-  console.log("isUsername", isUsername);
-  console.log("identifier", identifier);
-  console.log("amount", numericAmount);
-
-  const authHeader = req.headers.get("authorization");
-  if (!authHeader) return NextResponse.json({ message: "Không có token" }, { status: 401 });
-
-  const token = authHeader.split(" ")[1];
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  // Kiểm tra token
+  const { decoded, error } = verifyToken(req);
+  if (error) return error; // Trả về lỗi nếu token không hợp lệ
 
   try {
     const { is_admin } = decoded;
