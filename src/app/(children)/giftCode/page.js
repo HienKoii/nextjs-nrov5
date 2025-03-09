@@ -56,7 +56,7 @@ export default function GiftCodePage() {
                         <div>
                           {gift.detail.map((item) => (
                             <div key={item.id} className="mb-1">
-                              <Image src={`http://localhost:3000/api/icon?id=${item.icon}`} alt={item.icon} width={30} height={30} className="me-2" />
+                              <Image src={`api/icon?id=${item.icon}`} alt={item.icon} width={30} height={30} className="me-2" />
                               {item.name} (x{item.quantity})
                             </div>
                           ))}
