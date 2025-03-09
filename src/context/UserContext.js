@@ -25,8 +25,7 @@ export function UserProvider({ children }) {
 
         setUser(response.data);
       } catch (error) {
-        localStorage.removeItem("token"); // Xóa token nếu không hợp lệ
-        setUser(null);
+        handleLogout();
       } finally {
         setLoading(false);
       }
