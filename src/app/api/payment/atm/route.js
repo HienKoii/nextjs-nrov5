@@ -30,8 +30,8 @@ export async function POST(req) {
       const { transactionID, amount, description, type, transactionDate } = transaction;
 
       if (type === "IN") {
-        // Dùng regex để tìm ID user trong description (ví dụ: "naptien 611")
-        const match = description?.match(/naptien (\d+)/);
+        // Dùng regex để tìm ID user trong description (hỗ trợ cả "naptien" và "NAPTIEN") hihi
+        const match = description?.match(/naptien (\d+)/i);
 
         if (match) {
           const userId = parseInt(match[1], 10);
@@ -48,7 +48,7 @@ export async function POST(req) {
               console.log(`✅ Giao dịch ${transactionID} hợp lệ, tiến hành nạp tiền.`);
 
               // Cộng tiền vào tài khoản người dùng
-              await updateAccountMoney(userId, amount , true, true);
+              await updateAccountMoney(userId, amount, true, true);
 
               // Lưu lịch sử giao dịch vào database
               await db.query("INSERT INTO napatm (transaction_id, user_id, amount, transaction_date) VALUES (?, ?, ?, ?)", [transactionID, userId, amount, transactionDate]);
