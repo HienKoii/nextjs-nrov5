@@ -17,7 +17,7 @@ export async function GET(req) {
     const [totalPlayers] = await db.query("SELECT COUNT(*) AS total FROM player");
 
     // Lấy tổng doanh thu từ bảng `napthe` và `napatm`
-    const [naptheRevenue] = await db.query("SELECT IFNULL(SUM(declared_value), 0) AS total FROM napthe WHERE status = 1");
+    const [naptheRevenue] = await db.query("SELECT IFNULL(SUM(amount), 0) AS total FROM napthe WHERE status = 1");
     const [napatmRevenue] = await db.query("SELECT IFNULL(SUM(amount), 0) AS total FROM napatm");
 
     // Tổng doanh thu
