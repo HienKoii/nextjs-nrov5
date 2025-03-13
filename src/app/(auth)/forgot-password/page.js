@@ -2,6 +2,7 @@
 import Title from "@/components/Title/Title";
 import { useState } from "react";
 import { Form, Button, Container, Spinner, Card } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -9,7 +10,7 @@ export default function ForgotPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    toast.error("Chức năng chưa update");
   };
 
   return (
