@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
-import { getUserById } from "@/app/Service/accountService";
+import { getUserById } from "@/Services/accountService";
 
 
 export async function GET(req) {

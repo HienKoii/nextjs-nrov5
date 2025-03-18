@@ -1,5 +1,5 @@
-import { getUserById } from "@/app/Service/accountService";
 import db from "@/lib/db";
+import { getUserById } from "@/Services/accountService";
 import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 

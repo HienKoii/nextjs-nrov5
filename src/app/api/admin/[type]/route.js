@@ -1,5 +1,5 @@
-import { verifyToken } from "@/app/Service/tokenService";
 import db from "@/lib/db";
+import { verifyToken } from "@/Services/tokenService";
 import { NextResponse } from "next/server";
 
 export async function GET(req, context) {

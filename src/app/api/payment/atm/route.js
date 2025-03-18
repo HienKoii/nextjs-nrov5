@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import db from "@/lib/db"; // Kết nối database MySQL
 import axios from "axios";
-import { updateAccountMoney } from "@/app/Service/accountService";
+import { updateAccountMoney } from "@/Services/accountService";
 
 export async function POST(req) {
   try {

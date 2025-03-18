@@ -1,5 +1,5 @@
-import { updateAccountMoney } from "@/app/Service/accountService";
 import db from "@/lib/db";
+import { updateAccountMoney } from "@/Services/accountService";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {

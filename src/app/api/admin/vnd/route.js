@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import db from "@/lib/db";
-import { updateAccountMoney } from "@/app/Service/accountService";
-import { verifyToken } from "@/app/Service/tokenService";
+import { verifyToken } from "@/Services/tokenService";
+import { updateAccountMoney } from "@/Services/accountService";
 export async function POST(req) {
   const { amount, identifier, isUsername } = await req.json();
   const numericAmount = Number(amount); // Chuyển đổi amount thành số
