@@ -1,7 +1,7 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
-import useConfig from "@/hook/useConfig";
+import useConfig from "@/hooks/useConfig";
 
 const UserContext = createContext();
 

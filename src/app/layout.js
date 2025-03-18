@@ -1,9 +1,9 @@
 "use client";
-import "./globals.css";
+import "@/styles/globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import MainLayout from "./main";
-import useConfig from "@/hook/useConfig";
+import useConfig from "@/hooks/useConfig";
 
 export default function RootLayout({ children }) {
   const { config } = useConfig();

@@ -1,6 +1,6 @@
 "use client";
 import { useUser } from "@/context/UserContext";
-import useConfig from "@/hook/useConfig";
+import useConfig from "@/hooks/useConfig";
 import { formatCurrency } from "@/lib/utils";
 import axios from "axios";
 import Link from "next/link";

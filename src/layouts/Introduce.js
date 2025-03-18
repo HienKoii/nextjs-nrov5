@@ -1,5 +1,5 @@
 import Title from "@/components/Title/Title";
-import useConfig from "@/hook/useConfig";
+import useConfig from "@/hooks/useConfig";
 import React from "react";
 import { Card } from "react-bootstrap";
 

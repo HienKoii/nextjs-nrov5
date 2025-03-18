@@ -1,6 +1,6 @@
 "use client";
 import Title from "@/components/Title/Title";
-import useConfig from "@/hook/useConfig";
+import useConfig from "@/hooks/useConfig";
 import { Col, Image, Row } from "react-bootstrap";
 
 export default function DownloadPage() {

@@ -1,4 +1,4 @@
-import useConfig from "@/hook/useConfig";
+import useConfig from "@/hooks/useConfig";
 import Link from "next/link";
 import { Image } from "react-bootstrap";
 

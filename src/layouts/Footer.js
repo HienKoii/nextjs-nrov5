@@ -1,4 +1,4 @@
-import useConfig from "@/hook/useConfig";
+import useConfig from "@/hooks/useConfig";
 import { Card } from "react-bootstrap";
 
 export default function Footer() {
