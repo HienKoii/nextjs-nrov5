@@ -1,3 +1,17 @@
+/*
+CREATE TABLE napatm (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    transaction_id VARCHAR(255) NOT NULL UNIQUE,
+    user_id INT NOT NULL,
+    amount DECIMAL(15,2) NOT NULL,
+    transaction_date DATETIME NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES account(id),
+    INDEX idx_transaction_id (transaction_id),
+    INDEX idx_user_id (user_id)
+);
+*/
+
 import { NextResponse } from "next/server";
 import db from "@/lib/db"; // Kết nối database MySQL
 import axios from "axios";
