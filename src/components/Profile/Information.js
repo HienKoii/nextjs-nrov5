@@ -33,7 +33,7 @@ export default function Information() {
         </tr>
         <tr>
           <td className="text-warning">Số dư</td>
-          <td className="text-white">{formatCurrency(user?.vnd) || "0"} VNĐ</td>
+          <td className="text-white">{formatCurrency(user?.money) || "0"} VNĐ</td>
         </tr>
         <tr>
           <td className="text-warning">Tổng nạp</td>

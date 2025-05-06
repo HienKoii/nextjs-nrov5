@@ -16,7 +16,7 @@ export default function AuthNavLogin() {
           <span style={{ color: "#ffe7e7" }}>Xin chào, </span> <span className="text-warning">{user?.username} </span>
         </div>
         <div>
-          <span style={{ color: "#ffe7e7" }}> Bạn đang có:</span> <span className="text-warning"> {formatCurrency(user?.vnd)} VNĐ </span>
+          <span style={{ color: "#ffe7e7" }}> Bạn đang có:</span> <span className="text-warning"> {formatCurrency(user?.money)} VNĐ </span>
         </div>
       </Link>
       <div className="text-center">

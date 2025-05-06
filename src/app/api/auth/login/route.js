@@ -13,7 +13,7 @@ export async function POST(request) {
     }
 
     // Kiểm tra tài khoản trong database
-    const [user] = await db.query("SELECT * FROM account WHERE username = ? AND password = ?", [username, password]);
+    const [user] = await db.query("SELECT * FROM users WHERE username = ? AND password = ?", [username, password]);
     if (user.length === 0) {
       return NextResponse.json({ message: "Sai tài khoản hoặc mật khẩu." }, { status: 401 });
     }

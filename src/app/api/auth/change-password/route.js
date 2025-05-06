@@ -29,13 +29,13 @@ export async function POST(req) {
     }
 
     // Kiểm tra mật khẩu hiện tại
-    const [rows] = await db.query("SELECT password FROM account WHERE id = ?", [decoded.id]);
+    const [rows] = await db.query("SELECT password FROM users WHERE id = ?", [decoded.id]);
     if (rows.length === 0 || rows[0].password !== currentPassword) {
       return NextResponse.json({ message: "Mật khẩu hiện tại không đúng" }, { status: 401 });
     }
 
     // Cập nhật mật khẩu mới
-    await db.query("UPDATE account SET password = ? WHERE id = ?", [newPassword, decoded.id]);
+    await db.query("UPDATE users SET password = ? WHERE id = ?", [newPassword, decoded.id]);
 
     return NextResponse.json({ message: "Đổi mật khẩu thành công" }, { status: 200 });
   } catch (error) {

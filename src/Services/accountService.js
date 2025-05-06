@@ -1,10 +1,10 @@
 import db from "@/lib/db";
 import { createHistory } from "./historyService";
 export async function getUserById(userId) {
-  const [user] = await db.query("SELECT * FROM account WHERE id = ?", [userId]);
+  const [user] = await db.query("SELECT * FROM users WHERE id = ?", [userId]);
   if (!user || user.length === 0) return null;
 
-  const [pl] = await db.query("SELECT * FROM player WHERE account_id = ?", [user[0].id]);
+  const [pl] = await db.query("SELECT * FROM player WHERE playerId = ?", [user[0].id]);
 
   return {
     ...user[0],
@@ -36,7 +36,7 @@ export async function updateAccountMoney(accountId, value, isActive, isTopUp) {
     const totalMoney = value * (parseFloat(process.env.PROMO_RATE) || 1);
 
     // Xây dựng câu lệnh SQL động dựa trên isActive và isTopUp
-    const updateFields = [`vnd = vnd + ?`];
+    const updateFields = [`money = money + ?`];
 
     if (isTopUp) {
       updateFields.push(`tongnap = tongnap + ?`, `naptuan = naptuan + ?`);
