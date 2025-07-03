@@ -11,7 +11,7 @@
         {
             "title": "Box Zalo",
             "text": "Tham nhóm zalo ngay",
-            "href": "https://zalo.me/g/qxwmlw978"
+            "href": "https://zalo.me/g/wnhtsv141"
         }
     ],
     "payment": {
@@ -26,17 +26,17 @@
     "download": [
         {
             "type": 0,
-            "link": "/files/ngocronglau.ipa",
+            "link": "/files/aro.ipa",
             "content": "Phiên bản dành cho iphone. <br/>- File .ipa"
         },
         {
             "type": 1,
-            "link": "/files/nrolaunew.apk",
+            "link": "/files/nroaro.apk",
             "content": "Phiên bản dành cho Android. <br/>- File .apk"
         },
         {
             "type": 2,
-            "link": "/files/ngocronglau.rar",
+            "link": "/files/nroaro.rar",
             "content": "Phiên bản dành cho Windows (pc). <br/>- File .rar, .zip"
         },
         {

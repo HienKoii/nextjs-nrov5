@@ -5,7 +5,7 @@ import { formatCurrency } from "@/lib/utils";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect } from "react";
 import { Image, Table } from "react-bootstrap";
 
 export default function PaymentAtmPage() {
