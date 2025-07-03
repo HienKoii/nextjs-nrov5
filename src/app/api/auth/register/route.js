@@ -26,7 +26,7 @@ export async function POST(request) {
     }
 
     // Kiểm tra username hoặc email đã tồn tại chưa
-    const [existingUser] = await db.query("SELECT username, gmail FROM users WHERE username = ? OR gmail = ?", [username, email]);
+    const [existingUser] = await db.query("SELECT username, gmail FROM account WHERE username = ? OR gmail = ?", [username, email]);
 
     if (existingUser.length > 0) {
       if (existingUser.some((user) => user.username === username)) {
@@ -38,7 +38,7 @@ export async function POST(request) {
     }
 
     // Lưu mật khẩu vào database mà không mã hóa
-    await db.query("INSERT INTO users (username, gmail, password) VALUES (?, ?, ?)", [username, email, password]);
+    await db.query("INSERT INTO account (username, gmail, password) VALUES (?, ?, ?)", [username, email, password]);
 
     console.log(`Tài khoản ${username} đã được tạo thành công!`);
     return NextResponse.json({ message: `Tài khoản ${username} đăng ký thành công.` }, { status: 201 });

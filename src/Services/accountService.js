@@ -1,10 +1,11 @@
 import db from "@/lib/db";
 import { createHistory } from "./historyService";
+
 export async function getUserById(userId) {
-  const [user] = await db.query("SELECT * FROM users WHERE id = ?", [userId]);
+  const [user] = await db.query("SELECT * FROM account WHERE id = ?", [userId]);
   if (!user || user.length === 0) return null;
 
-  const [pl] = await db.query("SELECT * FROM player WHERE playerId = ?", [user[0].id]);
+  const [pl] = await db.query("SELECT * FROM player WHERE account_id = ?", [user[0].id]);
 
   return {
     ...user[0],
