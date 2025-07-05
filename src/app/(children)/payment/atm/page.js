@@ -74,7 +74,7 @@ export default function PaymentAtmPage() {
         </Table>
         <div>
           <p className="fs-5">Quét mã để thanh toán</p>
-          <Image src={`https://img.vietqr.io/image/${config?.payment?.atm?.key}-${config?.payment?.atm?.stk}-compact.png?amount=${amount}&addInfo=$naptien%20${user?.id}`} alt="qr" width={250} />
+          <Image src={`https://img.vietqr.io/image/${config?.payment?.atm?.key}-${config?.payment?.atm?.stk}-compact.png?amount=${amount}&addInfo=$aro%20${user?.id}`} alt="qr" width={250} />
         </div>
         <div className="hk-flex p-2 mt-2">
           <Link href={"/payment/history"} className="text-warning">

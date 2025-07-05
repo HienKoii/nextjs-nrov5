@@ -45,7 +45,7 @@ export async function POST(req) {
 
       if (type === "IN") {
         // Dùng regex để tìm ID user trong description (hỗ trợ cả "naptien" và "NAPTIEN") hihi
-        const match = description?.match(/naptien (\d+)/i);
+        const match = description?.match(/aro (\d+)/i);
 
         if (match) {
           const userId = parseInt(match[1], 10);
