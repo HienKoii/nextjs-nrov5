@@ -6,7 +6,6 @@ export async function POST(request) {
   try {
     // Lấy dữ liệu từ request
     const { username, email, password, confirmPassword } = await request.json();
-   
 
     // Kiểm tra dữ liệu đầu vào
     if (!username || !email || !password || !confirmPassword) {
@@ -38,7 +37,7 @@ export async function POST(request) {
     }
 
     // Lưu mật khẩu vào database mà không mã hóa
-    await db.query("INSERT INTO account (username, gmail, password) VALUES (?, ?, ?)", [username, email, password]);
+    await db.query("INSERT INTO account (username, gmail, password, active) VALUES (?, ?, ?,?)", [username, email, password, 0]);
 
     console.log(`Tài khoản ${username} đã được tạo thành công!`);
     return NextResponse.json({ message: `Tài khoản ${username} đăng ký thành công.` }, { status: 201 });
