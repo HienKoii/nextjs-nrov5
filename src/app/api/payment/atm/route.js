@@ -62,7 +62,7 @@ export async function POST(req) {
               console.log(`✅ Giao dịch ${transactionID} hợp lệ, tiến hành nạp tiền.`);
 
               // Cộng tiền vào tài khoản người dùng
-              await updateAccountMoney(userId, amount, true, true);
+              await updateAccountMoney(userId, amount, false, true);
 
               // Lưu lịch sử giao dịch vào database
               await db.query("INSERT INTO napatm (transaction_id, user_id, amount, transaction_date) VALUES (?, ?, ?, ?)", [transactionID, userId, amount, transactionDate]);

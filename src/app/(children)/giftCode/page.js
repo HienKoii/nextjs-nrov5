@@ -51,21 +51,22 @@ export default function GiftCodePage() {
                   <td className="text-white">{index + 1}</td>
                   <td className="text-white">{gift.code}</td>
                   <td className="text-white">
-                    {gift?.detail?.length > 0 ? (
+                    {/* {gift?.detail?.length > 0 ? (
                       <>
                         <div>
-                          {gift.detail.map((item) => (
-                            <div key={item.id} className="mb-1">
-                              <Image src={`api/icon?id=${item.icon}`} alt={item.icon} width={55} className="me-2 " />
-                              {item.name} (x{item.quantity})
-                            </div>
-                          ))}
+                          {gift?.detail &&
+                            gift?.detail?.map((item) => (
+                              <div key={item.id} className="mb-1">
+                                <Image src={`api/icon?id=${item.icon}`} alt={item.icon} width={55} className="me-2 " />
+                                {item.name} (x{item.quantity})
+                              </div>
+                            ))}
                         </div>
                         <br />
                       </>
                     ) : (
                       "Không có vật phẩm"
-                    )}
+                    )} */}
                   </td>
                   <td className="text-white">{formatTime(gift.expired)}</td>
                 </tr>
