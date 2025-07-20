@@ -1,0 +1,48 @@
+{
+    "title": "Chào mừng đến với Ngọc rồng LION",
+    "nameServer": "Ngọc Rồng Lion",
+    "description": "Ngọc rồng Lion free all, mở thành viên, x99999 thỏi vàng,... ",
+    "logoUrl": "/imgs/logolion.png",
+    "thongBao": {
+        "is": true,
+        "text": "<p class='text-center'>Chào mừng bạn đến với ngọc rồng lion free all</p>-Server test vĩnh viễn không rerest<br/>-Cảm ơn bạn đã đọc thông báo<br/>-Chúc bạn chơi game vui vẻ"
+    },
+    "hotLink": [
+        {
+            "title": "Box Zalo",
+            "text": "Tham nhóm zalo ngay",
+            "href": "https://zalo.me/g/wnhtsv141"
+        }
+    ],
+    "payment": {
+        "atm": {
+            "key": "VCB",
+            "nameStk": "Vietcombank",
+            "stk": "1052147418",
+            "name": "Nguyen Kim Hien"
+        },
+        "card": {}
+    },
+    "download": [
+        {
+            "type": 0,
+            "link": "/files/aro.ipa",
+            "content": "Phiên bản dành cho iphone. <br/>- File .ipa"
+        },
+        {
+            "type": 1,
+            "link": "/files/nroaro.apk",
+            "content": "Phiên bản dành cho Android. <br/>- File .apk"
+        },
+        {
+            "type": 2,
+            "link": "/files/nroaro.rar",
+            "content": "Phiên bản dành cho Windows (pc). <br/>- File .rar, .zip"
+        },
+        {
+            "type": 3,
+            "link": "/files/DragonBoy230Prev1.7.jar",
+            "content": "Phiên bản dành cho Java.<br/>- File .jar"
+        }
+    ]
+}

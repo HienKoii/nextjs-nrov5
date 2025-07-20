@@ -6,7 +6,7 @@ export default function useConfig() {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`/config.json?t=${new Date().getTime()}`)
+    fetch(`../config/${process.env.NEXT_PUBLIC_SITE_ID}.json?t=${new Date().getTime()}`)
       .then((response) => response.json())
       .then((data) => setConfig(data))
       .catch((error) => console.error("Lỗi khi tải config.json", error))
