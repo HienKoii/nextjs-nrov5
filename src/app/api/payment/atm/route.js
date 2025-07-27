@@ -45,7 +45,11 @@ export async function POST(req) {
 
       if (type === "IN") {
         // Dùng regex để tìm ID user trong description (hỗ trợ cả "naptien" và "NAPTIEN") hihi
-        const match = description?.match(/aro (\d+)/i);
+        const siteId = process.env.NEXT_PUBLIC_SITE_ID; // hoặc từ bất kỳ đâu bạn lấy giá trị
+        console.log("siteId", siteId);
+        const regex = new RegExp(`${siteId} (\\d+)`, "i");
+        const match = description?.match(regex);
+        console.log("match", match);
 
         if (match) {
           const userId = parseInt(match[1], 10);

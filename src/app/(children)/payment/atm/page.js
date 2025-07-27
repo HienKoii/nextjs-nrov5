@@ -16,6 +16,7 @@ export default function PaymentAtmPage() {
 
   const amount = searchParams.get("amount");
 
+  const noiDung = process.env.NEXT_PUBLIC_SITE_ID;
   // 🔥 Kiểm tra nếu chưa đăng nhập → Chuyển hướng về trang chủ
   useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -68,13 +69,15 @@ export default function PaymentAtmPage() {
             </tr>
             <tr>
               <td className="text-white">Nội dung</td>
-              <td className="text-white">naptien {user?.id}</td>
+              <td className="text-white">
+                {noiDung} {user?.id}
+              </td>
             </tr>
           </tbody>
         </Table>
         <div>
           <p className="fs-5">Quét mã để thanh toán</p>
-          <Image src={`https://img.vietqr.io/image/${config?.payment?.atm?.key}-${config?.payment?.atm?.stk}-compact.png?amount=${amount}&addInfo=$aro%20${user?.id}`} alt="qr" width={250} />
+          <Image src={`https://img.vietqr.io/image/${config?.payment?.atm?.key}-${config?.payment?.atm?.stk}-compact.png?amount=${amount}&addInfo=${noiDung}%20${user?.id}`} alt="qr" width={250} />
         </div>
         <div className="hk-flex p-2 mt-2">
           <Link href={"/payment/history"} className="text-warning">

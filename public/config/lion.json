@@ -11,7 +11,7 @@
         {
             "title": "Box Zalo",
             "text": "Tham nhóm zalo ngay",
-            "href": "https://zalo.me/g/wnhtsv141"
+            "href": "https://zalo.me/g/brepwp373"
         }
     ],
     "payment": {
@@ -26,22 +26,22 @@
     "download": [
         {
             "type": 0,
-            "link": "/files/aro.ipa",
+            "link": "https://drive.google.com/file/d/1_mzujN6iGQhUxBSt6-206Lvw-pJfmfBb/view?usp=sharing",
             "content": "Phiên bản dành cho iphone. <br/>- File .ipa"
         },
         {
             "type": 1,
-            "link": "/files/nroaro.apk",
+            "link": "https://drive.google.com/file/d/1zBChE0jHyEoRlPeyVWxyfpJRKwmnwgIQ/view?usp=sharing",
             "content": "Phiên bản dành cho Android. <br/>- File .apk"
         },
         {
             "type": 2,
-            "link": "/files/nroaro.rar",
+            "link": "https://drive.google.com/file/d/12SoUiItytF1sx2pcVyXErpos588Lh5SZ/view?usp=sharing",
             "content": "Phiên bản dành cho Windows (pc). <br/>- File .rar, .zip"
         },
         {
             "type": 3,
-            "link": "/files/DragonBoy230Prev1.7.jar",
+            "link": "/files/DragonBoyLion230Prev1.7.jar",
             "content": "Phiên bản dành cho Java.<br/>- File .jar"
         }
     ]
