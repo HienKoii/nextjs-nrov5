@@ -1,8 +1,9 @@
 "use client";
 import TransactionHistory from "@/components/Payment/TransactionHistory";
+import { AppContext } from "@/context/AppContext";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export default function PaymentHistoryPage() {
   const router = useRouter();
@@ -10,6 +11,8 @@ export default function PaymentHistoryPage() {
   const [historyAtm, setHistoryAtm] = useState([]);
 
   const [loading, setLoading] = useState(true);
+
+  const { fetchHistory: fetchLSGD } = useContext(AppContext);
 
   useEffect(() => {
     const fetchHistory = async () => {
@@ -36,12 +39,12 @@ export default function PaymentHistoryPage() {
   }, []);
 
   const fetchAutoDeposit = async () => {
-    // try {
-    //   const response = await axios.post("/api/payment/atm");
-    //   console.log("response.data", response.data);
-    // } catch (error) {
-    //   console.error("Lỗi auto deposit:", error);
-    // }
+    try {
+      const res = await axios.post("/api/payment/atm");
+      console.log("Kết quả cộng tiền: ", res.data);
+    } catch (error) {
+      console.error("Fetch history error:", error);
+    }
   };
 
   useEffect(() => {

@@ -1,11 +1,12 @@
 "use client";
+import { AppContext } from "@/context/AppContext";
 import { useUser } from "@/context/UserContext";
 import useConfig from "@/hooks/useConfig";
 import { formatCurrency } from "@/lib/utils";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Image, Table } from "react-bootstrap";
 
 export default function PaymentAtmPage() {
@@ -13,7 +14,6 @@ export default function PaymentAtmPage() {
   const searchParams = useSearchParams();
   const { config } = useConfig();
   const { user } = useUser();
-
   const amount = searchParams.get("amount");
 
   const noiDung = process.env.NEXT_PUBLIC_SITE_ID;
@@ -24,27 +24,27 @@ export default function PaymentAtmPage() {
     }
   }, []);
 
-  // const fetchAutoDeposit = async () => {
-  //   // try {
-  //   //   const response = await axios.post("/api/payment/atm");
-  //   //   console.log("response.data", response.data);
-  //   // } catch (error) {
-  //   //   console.error("Lỗi auto deposit:", error);
-  //   // }
-  // };
+  const fetchAutoDeposit = async () => {
+    try {
+      const res = await axios.post("/api/payment/atm");
+      console.log("Kết quả cộng tiền: ", res.data);
+    } catch (error) {
+      console.error("Fetch history error:", error);
+    }
+  };
 
-  // useEffect(() => {
-  //   // Gọi API ngay khi component mount
-  //   fetchAutoDeposit();
+  useEffect(() => {
+    // Gọi API ngay khi component mount
+    fetchAutoDeposit();
 
-  //   // Đặt interval gọi API mỗi 15 giây
-  //   const interval = setInterval(() => {
-  //     fetchAutoDeposit();
-  //   }, 15000 * 2);
+    // Đặt interval gọi API mỗi 15 giây
+    const interval = setInterval(() => {
+      fetchAutoDeposit();
+    }, 15000 * 2);
 
-  //   // Dọn dẹp interval khi component unmount
-  //   return () => clearInterval(interval);
-  // }, []);
+    // Dọn dẹp interval khi component unmount
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div>
