@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import MainLayout from "./main";
 import useConfig from "@/hooks/useConfig";
+import { AppProvider } from "@/context/AppContext";
 
 export default function RootLayout({ children }) {
   const { config } = useConfig();
@@ -21,7 +22,9 @@ export default function RootLayout({ children }) {
           backgroundAttachment: "fixed",
         }}
       >
-        <MainLayout id="__next">{children}</MainLayout>
+        <AppProvider>
+          <MainLayout id="__next">{children}</MainLayout>
+        </AppProvider>
       </body>
     </html>
   );
