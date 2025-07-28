@@ -1,26 +1,12 @@
 "use client";
 import { formatCurrency, formatStatusCard, formatTime } from "@/lib/utils";
-import { Badge, Button, Table } from "react-bootstrap";
+import { Badge, Table } from "react-bootstrap";
 import Title from "../Title/Title";
-import axios from "axios";
 
 export default function TransactionHistory({ history, historyAtm }) {
-  const fetchAutoDeposit = async () => {
-    try {
-      const get = await axios.get("https://api.sieuthicode.net/historyapivcbv2/851601caa8b57859fc0e8b61cdcb2a78");
-      console.log("Lấy lịch sử: ", get.data);
-
-      // const res = await axios.post("/api/payment/atm");
-      // console.log("Kết quả cộng tiền: ", res.data);
-    } catch (error) {
-      console.error("Fetch history error:", error);
-    }
-  };
-
   return (
     <>
       <div>
-        <Button onClick={() => fetchAutoDeposit()}>Kiểm tra</Button>
         <Title title={"Lịch sử nạp thẻ"} />
 
         {history && history.length > 0 ? (
