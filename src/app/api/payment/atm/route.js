@@ -20,76 +20,89 @@ import { updateAccountMoney } from "@/Services/accountService";
 export async function POST(req) {
   try {
     const token = process.env.TOKEN_ATM;
-    console.log("token", token);
+    const siteId = process.env.NEXT_PUBLIC_SITE_ID;
+    console.log("[AutoDeposit] Bắt đầu xử lý POST /api/payment/atm");
+    console.log("[AutoDeposit] TOKEN_ATM:", token);
+    console.log("[AutoDeposit] NEXT_PUBLIC_SITE_ID:", siteId);
+    if (!token || !siteId) {
+      console.error("[AutoDeposit] Thiếu biến môi trường");
+      return NextResponse.json({ message: "Thiếu biến môi trường TOKEN_ATM hoặc NEXT_PUBLIC_SITE_ID" }, { status: 500 });
+    }
+
     // Gọi API lấy lịch sử giao dịch
-    const response = await axios.get(`https://api.sieuthicode.net/historyapivcbv2/${token}`);
+    let response;
+    try {
+      console.log("[AutoDeposit] Gọi API lấy lịch sử giao dịch...");
+      response = await axios.get(`https://api.sieuthicode.net/historyapivcbv2/${token}`);
+      console.log("[AutoDeposit] API trả về:", response.data);
+    } catch (err) {
+      const msg = err?.response?.data?.message || err.message || "Không xác định";
+      console.error("[AutoDeposit] Lỗi gọi API:", msg);
+      return NextResponse.json({ message: `Lỗi gọi API: ${msg}`, status: err?.response?.status || 500 }, { status: 500 });
+    }
 
-    // Log dữ liệu API trả về để kiểm tra
-    console.log("📢 API Response Data:", response.data);
-
-    // Kiểm tra nếu `transactions` không tồn tại hoặc không phải là mảng
     const transactions = response.data?.transactions;
-
-    if (!transactions) {
-      console.error("🚫 Lỗi: API không trả về dữ liệu giao dịch!");
-      return NextResponse.json({ message: "API không có dữ liệu giao dịch" }, { status: 500 });
-    }
-
+    console.log(`[AutoDeposit] Số lượng giao dịch lấy về: ${Array.isArray(transactions) ? transactions.length : 0}`);
     if (!Array.isArray(transactions)) {
-      console.error("🚫 Lỗi: transactions không phải là một mảng!", transactions);
-      return NextResponse.json({ message: "Lỗi dữ liệu từ API" }, { status: 500 });
+      console.error("[AutoDeposit] API không trả về mảng giao dịch", transactions);
+      return NextResponse.json({ message: "API không trả về mảng giao dịch" }, { status: 500 });
     }
 
-    let count = 0;
-
-    for (const transaction of transactions) {
-      const { transactionID, amount, description, type, transactionDate } = transaction;
-
-      if (type === "IN") {
-        // Dùng regex để tìm ID user trong description (hỗ trợ cả "naptien" và "NAPTIEN") hihi
-        const siteId = process.env.NEXT_PUBLIC_SITE_ID; // hoặc từ bất kỳ đâu bạn lấy giá trị
-        const regex = new RegExp(`${siteId} (\\d+)`, "i");
-        const match = description?.match(regex);
-
-        if (match) {
-          const userId = parseInt(match[1], 10);
-          console.log(`🔍 Kiểm tra userId: ${userId}`);
-
-          // Kiểm tra user có tồn tại không
-          const user = await db.query("SELECT id FROM account WHERE id = ?", [userId]);
-
-          if (user.length > 0) {
-            // Kiểm tra xem giao dịch đã được xử lý chưa
-            const checkExist = await db.query("SELECT * FROM napatm WHERE transaction_id = ?", [transactionID]);
-
-            if (checkExist[0].length === 0) {
-              console.log(`✅ Giao dịch ${transactionID} hợp lệ, tiến hành nạp tiền.`);
-
-              // Cộng tiền vào tài khoản người dùng
-              await updateAccountMoney(userId, amount, false, true);
-
-              // Lưu lịch sử giao dịch vào database
-              await db.query("INSERT INTO napatm (transaction_id, user_id, amount, transaction_date) VALUES (?, ?, ?, ?)", [transactionID, userId, amount, transactionDate]);
-
-              count++;
-            } else {
-              console.log(`⚠️ Giao dịch ${transactionID} đã tồn tại, bỏ qua.`);
-            }
-          } else {
-            console.log(`🚫 User ID ${userId} không tồn tại, bỏ qua giao dịch.`);
-          }
-        } else {
-          console.log("🚫 Không tìm thấy ID user trong mô tả giao dịch.");
-        }
-      } else {
-        console.log("🔄 Giao dịch không phải là nạp tiền, bỏ qua.");
+    // Lọc các giao dịch hợp lệ
+    const validTransactions = transactions.filter((tran) => {
+      if (tran.type !== "IN") return false;
+      const regex = new RegExp(`${siteId} (\\d+)`, "i");
+      const isValid = regex.test(tran.description || "");
+      if (!isValid) {
+        console.log(`[AutoDeposit] Bỏ qua giao dịch không hợp lệ:`, tran);
       }
-    }
+      return isValid;
+    });
+    console.log(`[AutoDeposit] Số giao dịch hợp lệ: ${validTransactions.length}`);
 
-    console.log(`✅ Hoàn thành xử lý. Đã cộng tiền cho ${count} giao dịch hợp lệ.`);
-    return NextResponse.json({ message: `Đã cộng tiền cho ${count} giao dịch hợp lệ` }, { status: 200 });
+    // Xử lý song song các giao dịch hợp lệ
+    let count = 0;
+    const results = await Promise.all(
+      validTransactions.map(async (tran, idx) => {
+        console.log(`[AutoDeposit][${idx}] Bắt đầu xử lý giao dịch:`, tran);
+        const regex = new RegExp(`${siteId} (\\d+)`, "i");
+        const match = (tran.description || "").match(regex);
+        if (!match) {
+          console.log(`[AutoDeposit][${idx}] Không tìm thấy userId trong mô tả giao dịch.`);
+          return null;
+        }
+        const userId = parseInt(match[1], 10);
+        console.log(`[AutoDeposit][${idx}] userId tìm được:`, userId);
+        // Kiểm tra user
+        const user = await db.query("SELECT id FROM account WHERE id = ?", [userId]);
+        if (!user.length) {
+          console.log(`[AutoDeposit][${idx}] UserId không tồn tại trong DB, bỏ qua.`);
+          return null;
+        }
+        // Kiểm tra giao dịch đã xử lý chưa
+        const checkExist = await db.query("SELECT * FROM napatm WHERE transaction_id = ?", [tran.transactionID]);
+        if (checkExist[0].length > 0) {
+          console.log(`[AutoDeposit][${idx}] Giao dịch đã tồn tại, bỏ qua.`);
+          return null;
+        }
+        // Cộng tiền và lưu lịch sử
+        try {
+          await updateAccountMoney(userId, tran.amount, false, true);
+          await db.query("INSERT INTO napatm (transaction_id, user_id, amount, transaction_date) VALUES (?, ?, ?, ?)", [tran.transactionID, userId, tran.amount, tran.transactionDate]);
+          count++;
+          console.log(`[AutoDeposit][${idx}] Đã cộng tiền và lưu lịch sử cho userId:`, userId);
+        } catch (err) {
+          console.error(`[AutoDeposit][${idx}] Lỗi khi cộng tiền/lưu lịch sử:`, err);
+          return null;
+        }
+        return userId;
+      })
+    );
+
+    console.log(`[AutoDeposit] Hoàn thành xử lý. Đã cộng tiền cho ${count} giao dịch hợp lệ.`);
+    return NextResponse.json({ message: `Đã cộng tiền cho ${count} giao dịch hợp lệ`, users: results.filter(Boolean) }, { status: 200 });
   } catch (error) {
     console.error("❌ Lỗi khi xử lý auto deposit:", error);
-    return NextResponse.json({ message: "Lỗi xử lý auto deposit" }, { status: 500 });
+    return NextResponse.json({ message: error?.message || "Lỗi xử lý auto deposit" }, { status: 500 });
   }
 }
