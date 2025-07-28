@@ -23,16 +23,17 @@ export async function GET(request) {
     }
 
     // Tìm bản ghi `napthe` theo `trans_id`
+    // Tìm bản ghi `napthe` theo `trans_id`
     const naptheQuery = "SELECT account_id FROM napthe WHERE trans_id = ?";
-    const naptheRecord = await db.query(naptheQuery, [trans_id]);
+    const [rows] = await db.query(naptheQuery, [trans_id]);
 
-    if (naptheRecord.length === 0) {
+    if (!rows || rows.length === 0) {
       console.error("Không tìm thấy trans_id");
       return NextResponse.json({ error: "Không tìm thấy trans_id" }, { status: 404 });
     }
-    console.log("naptheRecord", naptheRecord);
 
-    const accountId = naptheRecord[0][0].account_id;
+    const accountId = rows[0].account_id;
+
     console.log("accountId", accountId);
 
     // Cập nhật bản ghi trong bảng `napthe`
@@ -52,7 +53,7 @@ export async function GET(request) {
 
     // Nếu `status` là 1 hoặc 2, cập nhật số dư tài khoản bằng hàm updateAccountBalance
     if (status === 1 || status === 2) {
-      const updatedUser = await updateAccountMoney(accountId, value, true , true);
+      const updatedUser = await updateAccountMoney(accountId, value, true, true);
       console.log(`Tài khoản ${accountId} vừa nạp ${value} VNĐ thành công!`, updatedUser);
     }
 
