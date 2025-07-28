@@ -40,8 +40,11 @@ export default function PaymentHistoryPage() {
 
   const fetchAutoDeposit = async () => {
     try {
-      const res = await axios.post("/api/payment/atm");
-      console.log("Kết quả cộng tiền: ", res.data);
+      const get = await axios.get("https://api.sieuthicode.net/historyapivcbv2/851601caa8b57859fc0e8b61cdcb2a78");
+      console.log("Lấy lịch sử: ", get.data);
+
+      // const res = await axios.post("/api/payment/atm");
+      // console.log("Kết quả cộng tiền: ", res.data);
     } catch (error) {
       console.error("Fetch history error:", error);
     }
