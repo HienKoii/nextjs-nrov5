@@ -19,19 +19,15 @@ import { updateAccountMoney } from "@/Services/accountService";
 
 export async function POST(req) {
   try {
-    // // Gọi API lấy lịch sử giao dịch
-    const api = `https://api.sieuthicode.net/historyapivcbv2/851601caa8b57859fc0e8b61cdcb2a78`;
-    const response = await fetch(api);
-    const data = await response.json(); // parse JSON response
-    // const response = await axios.get(api);
+    // Gọi API lấy lịch sử giao dịch
+    const api = `https://api.sieuthicode.net/historyapivcbv2/${process.env.TOKEN_ATM}`;
+    const response = await axios.get(api);
 
-    // // Log dữ liệu API trả về để kiểm tra
-    console.log("📢 API Response Data:", data.transactions);
-    // const data = await req.json();
-    // console.log("transactions: ", data);
+    // Log dữ liệu API trả về để kiểm tra
+    console.log("📢 API Response Data:", response.data);
 
     // Kiểm tra nếu `transactions` không tồn tại hoặc không phải là mảng
-    const transactions = data.transactions;
+    const transactions = response.data?.transactions;
 
     if (!transactions) {
       console.error("🚫 Lỗi: API không trả về dữ liệu giao dịch!");
