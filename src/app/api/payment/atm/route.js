@@ -19,11 +19,12 @@ import { updateAccountMoney } from "@/Services/accountService";
 
 export async function POST(req) {
   try {
+    const token = process.env.TOKEN_ATM;
     // Gọi API lấy lịch sử giao dịch
-    const response = await axios.get(`https://api.sieuthicode.net/historyapivcbv2/${process.env.TOKEN_ATM}`);
+    const response = await axios.get(`https://api.sieuthicode.net/historyapivcbv2/${token}`);
 
     // Log dữ liệu API trả về để kiểm tra
-    console.log("📢 API Response Data:", response.data);
+    // console.log("📢 API Response Data:", response.data);
 
     // Kiểm tra nếu `transactions` không tồn tại hoặc không phải là mảng
     const transactions = response.data?.transactions;
@@ -46,10 +47,8 @@ export async function POST(req) {
       if (type === "IN") {
         // Dùng regex để tìm ID user trong description (hỗ trợ cả "naptien" và "NAPTIEN") hihi
         const siteId = process.env.NEXT_PUBLIC_SITE_ID; // hoặc từ bất kỳ đâu bạn lấy giá trị
-        console.log("siteId", siteId);
         const regex = new RegExp(`${siteId} (\\d+)`, "i");
         const match = description?.match(regex);
-        console.log("match", match);
 
         if (match) {
           const userId = parseInt(match[1], 10);
