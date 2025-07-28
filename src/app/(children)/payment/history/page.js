@@ -37,13 +37,10 @@ export default function PaymentHistoryPage() {
 
   const fetchAutoDeposit = async () => {
     try {
-      const token = "851601caa8b57859fc0e8b61cdcb2a78";
-      const api = `https://api.sieuthicode.net/historyapivcbv2/${token}`;
-      const response = await axios.get(api);
-      // const response = await axios.post("/api/payment/atm");
+      const response = await axios.post("/api/payment/atm");
       console.log("response.data", response.data);
     } catch (error) {
-      // console.error("Lỗi auto deposit:", error);
+      console.error("Lỗi auto deposit:", error);
     }
   };
 
