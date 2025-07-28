@@ -20,7 +20,7 @@ import { updateAccountMoney } from "@/Services/accountService";
 export async function POST(req) {
   try {
     // Gọi API lấy lịch sử giao dịch
-    const api = `https://api.sieuthicode.net/historyapivcbv2/${process.env.TOKEN_ATM}`;
+    const api = `https://api.sieuthicode.net/historyapivcbv2/851601caa8b57859fc0e8b61cdcb2a78`;
     const response = await axios.get(api);
 
     // Log dữ liệu API trả về để kiểm tra
