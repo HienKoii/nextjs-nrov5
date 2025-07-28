@@ -27,8 +27,13 @@ export default function PaymentAtm() {
   const handlePayment = () => {
     if (selectedValue) {
       setShowPayment(!showPayment);
+      localStorage.setItem("isPayment", true);
       router.push(`/payment/atm?amount=${selectedValue}`);
     }
+  };
+
+  const handleSelectedValue = (value) => {
+    setSelectedValue(value);
   };
 
   return (
@@ -42,7 +47,7 @@ export default function PaymentAtm() {
                 <Col key={index} xs={6} md={3} className="mb-3">
                   <div
                     className={`recharge-method-item fw-semibold text-center ${selectedValue === item.value ? "active" : ""}`}
-                    onClick={() => setSelectedValue(item.value)}
+                    onClick={() => handleSelectedValue(item.value)}
                     style={{ cursor: "pointer", padding: "10px", border: "1px solid #ddd", borderRadius: "8px" }}
                   >
                     <p>{formatCurrency(item.value)}đ</p>

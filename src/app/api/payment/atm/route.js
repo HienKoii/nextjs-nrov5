@@ -19,15 +19,17 @@ import { updateAccountMoney } from "@/Services/accountService";
 
 export async function POST(req) {
   try {
-    // Gọi API lấy lịch sử giao dịch
-    const api = `https://api.sieuthicode.net/historyapivcbv2/851601caa8b57859fc0e8b61cdcb2a78`;
-    const response = await axios.get(api);
+    // // Gọi API lấy lịch sử giao dịch
+    // const api = `https://api.sieuthicode.net/historyapivcbv2/851601caa8b57859fc0e8b61cdcb2a78`;
+    // const response = await axios.get(api);
 
-    // Log dữ liệu API trả về để kiểm tra
-    console.log("📢 API Response Data:", response.data);
+    // // Log dữ liệu API trả về để kiểm tra
+    // console.log("📢 API Response Data:", response.data);
+    const data = await req.json();
+    console.log("transactions: ", data);
 
     // Kiểm tra nếu `transactions` không tồn tại hoặc không phải là mảng
-    const transactions = response.data?.transactions;
+    const transactions = data;
 
     if (!transactions) {
       console.error("🚫 Lỗi: API không trả về dữ liệu giao dịch!");
@@ -45,8 +47,10 @@ export async function POST(req) {
       const { transactionID, amount, description, type, transactionDate } = transaction;
 
       if (type === "IN") {
-        // Dùng regex để tìm ID user trong description (hỗ trợ cả "naptien" và "NAPTIEN") hihi
-        const match = description?.match(/pony (\d+)/i);
+        // Dùng regex để tìm ID user trong description, lấy prefix từ biến môi trường
+        const siteId = process.env.NEXT_PUBLIC_SITE_ID || "nro";
+        const regex = new RegExp(`${siteId} (\\d+)`, "i");
+        const match = description?.match(regex);
 
         if (match) {
           const userId = parseInt(match[1], 10);
@@ -87,7 +91,7 @@ export async function POST(req) {
     if (count > 0) {
       return NextResponse.json({ message: `Đã cộng tiền cho ${count} giao dịch hợp lệ` }, { status: 200 });
     } else {
-      return NextResponse.json({ message: "Không có giao dịch hợp lệ nào được xử lý" }, { status: 400 });
+      return NextResponse.json({ message: "Không có giao dịch hợp lệ nào được xử lý" }, { status: 200 });
     }
   } catch (error) {
     console.error("❌ Lỗi khi xử lý auto deposit:", error);

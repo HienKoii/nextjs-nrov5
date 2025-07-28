@@ -36,12 +36,12 @@ export default function PaymentHistoryPage() {
   }, []);
 
   const fetchAutoDeposit = async () => {
-    try {
-      const response = await axios.post("/api/payment/atm");
-      console.log("response.data", response.data);
-    } catch (error) {
-      console.error("Lỗi auto deposit:", error);
-    }
+    // try {
+    //   const response = await axios.post("/api/payment/atm");
+    //   console.log("response.data", response.data);
+    // } catch (error) {
+    //   console.error("Lỗi auto deposit:", error);
+    // }
   };
 
   useEffect(() => {

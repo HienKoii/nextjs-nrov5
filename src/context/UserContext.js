@@ -24,7 +24,7 @@ export function UserProvider({ children }) {
         });
 
         setUser(response.data);
-        console.log('response.data setUser: ', response.data)
+        // console.log('response.data setUser: ', response.data)
       } catch (error) {
         handleLogout();
       } finally {

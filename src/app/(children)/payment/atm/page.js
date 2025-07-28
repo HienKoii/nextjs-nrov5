@@ -24,27 +24,27 @@ export default function PaymentAtmPage() {
     }
   }, []);
 
-  const fetchAutoDeposit = async () => {
-    try {
-      const response = await axios.post("/api/payment/atm");
-      console.log("response.data", response.data);
-    } catch (error) {
-      console.error("Lỗi auto deposit:", error);
-    }
-  };
+  // const fetchAutoDeposit = async () => {
+  //   // try {
+  //   //   const response = await axios.post("/api/payment/atm");
+  //   //   console.log("response.data", response.data);
+  //   // } catch (error) {
+  //   //   console.error("Lỗi auto deposit:", error);
+  //   // }
+  // };
 
-  useEffect(() => {
-    // Gọi API ngay khi component mount
-    fetchAutoDeposit();
+  // useEffect(() => {
+  //   // Gọi API ngay khi component mount
+  //   fetchAutoDeposit();
 
-    // Đặt interval gọi API mỗi 15 giây
-    const interval = setInterval(() => {
-      fetchAutoDeposit();
-    }, 15000 * 2);
+  //   // Đặt interval gọi API mỗi 15 giây
+  //   const interval = setInterval(() => {
+  //     fetchAutoDeposit();
+  //   }, 15000 * 2);
 
-    // Dọn dẹp interval khi component unmount
-    return () => clearInterval(interval);
-  }, []);
+  //   // Dọn dẹp interval khi component unmount
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <div>
@@ -75,10 +75,19 @@ export default function PaymentAtmPage() {
             </tr>
           </tbody>
         </Table>
+
         <div>
           <p className="fs-5">Quét mã để thanh toán</p>
           <Image src={`https://img.vietqr.io/image/${config?.payment?.atm?.key}-${config?.payment?.atm?.stk}-compact.png?amount=${amount}&addInfo=${noiDung}%20${user?.id}`} alt="qr" width={250} />
         </div>
+
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", marginBottom: 16 }}>
+          <button disabled style={{ padding: "10px 24px", borderRadius: 8, background: "#ffc107", color: "#222", fontWeight: 600, border: "none", fontSize: 18, display: "flex", alignItems: "center", gap: 8 }}>
+            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" style={{ marginRight: 8 }}></span>
+            Đang chờ quét mã...
+          </button>
+        </div>
+
         <div className="hk-flex p-2 mt-2">
           <Link href={"/payment/history"} className="text-warning">
             Kiểm tra lịch sử nạp
