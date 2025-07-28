@@ -28,7 +28,7 @@ export async function POST(req) {
     const data = await req.json();
     console.log("Lịch sử giao dịch: ", data);
     // Kiểm tra nếu `transactions` không tồn tại hoặc không phải là mảng
-    const transactions = [];
+    const transactions = data?.transactions;
 
     if (!transactions) {
       console.error("🚫 Lỗi: API không trả về dữ liệu giao dịch!");
