@@ -23,7 +23,6 @@ export async function GET(request) {
     }
 
     // Tìm bản ghi `napthe` theo `trans_id`
-    // Tìm bản ghi `napthe` theo `trans_id`
     const naptheQuery = "SELECT account_id FROM napthe WHERE trans_id = ?";
     const [rows] = await db.query(naptheQuery, [trans_id]);
 

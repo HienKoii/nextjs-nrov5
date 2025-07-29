@@ -12,7 +12,7 @@ export default function PaymentHistoryPage() {
 
   const [loading, setLoading] = useState(true);
 
-  const { fetchHistory: fetchLSGD } = useContext(AppContext);
+  const { fetchAutoDeposit } = useContext(AppContext);
 
   useEffect(() => {
     const fetchHistory = async () => {
@@ -36,23 +36,9 @@ export default function PaymentHistoryPage() {
     };
 
     fetchHistory();
-  }, []);
+  }, [router, fetchAutoDeposit]);
 
-  const fetchAutoDeposit = async () => {
-    try {
-      const { data } = await axios.get("https://api.sieuthicode.net/historyapivcbv2/851601caa8b57859fc0e8b61cdcb2a78");
-      const transactions = data?.transactions;
-      if (Array.isArray(transactions) && transactions.length > 0) {
-        // Chỉ gửi dữ liệu cần thiết
-        const res = await axios.post("/api/payment/atm", { transactions });
-        // Log kết quả nếu cần debug
-        // console.log("Kết quả cộng tiền: ", res.data);
-      }
-    } catch (error) {
-      // Chỉ log lỗi khi thực sự cần thiết
-      // console.error("Fetch history error:", error);
-    }
-  };
+  // ...existing code...
 
   useEffect(() => {
     // Gọi API ngay khi component mount
@@ -65,7 +51,7 @@ export default function PaymentHistoryPage() {
 
     // Dọn dẹp interval khi component unmount
     return () => clearInterval(interval);
-  }, []);
+  }, [fetchAutoDeposit]);
 
   if (loading) {
     return <p className="text-center text-warning">Đang tải dữ liệu...</p>;
