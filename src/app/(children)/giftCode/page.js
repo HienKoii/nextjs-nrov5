@@ -40,7 +40,7 @@ export default function GiftCodePage() {
             <tr>
               <th className="text-warning">STT</th>
               <th className="text-warning">Code</th>
-              <th className="text-warning">Danh sách vật phẩm</th>
+              {/* <th className="text-warning">Danh sách vật phẩm</th> */}
               <th className="text-warning">HSD</th>
             </tr>
           </thead>
@@ -50,8 +50,8 @@ export default function GiftCodePage() {
                 <tr key={gift.id || index}>
                   <td className="text-white">{index + 1}</td>
                   <td className="text-white">{gift.code}</td>
-                  <td className="text-white">
-                    {/* {gift?.detail?.length > 0 ? (
+                  {/* <td className="text-white">
+                    {gift?.detail?.length > 0 ? (
                       <>
                         <div>
                           {gift?.detail &&
@@ -66,8 +66,8 @@ export default function GiftCodePage() {
                       </>
                     ) : (
                       "Không có vật phẩm"
-                    )} */}
-                  </td>
+                    )}
+                  </td> */}
                   <td className="text-white">{formatTime(gift.expired)}</td>
                 </tr>
               ))
