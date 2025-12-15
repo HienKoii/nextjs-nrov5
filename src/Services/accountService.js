@@ -40,7 +40,7 @@ export async function updateAccountMoney(accountId, value, isActive, isTopUp) {
     const updateFields = [`vnd = vnd + ?`];
 
     if (isTopUp) {
-      updateFields.push(`tongnap = tongnap + ?`, `naptuan = naptuan + ?`);
+      updateFields.push(`danap = danap + ?`, `naptuan = naptuan + ?`);
     }
 
     if (isActive) {
