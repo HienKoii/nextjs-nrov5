@@ -73,7 +73,7 @@ export async function updateAccountMoney(accountId, value, isActive, isTopUp) {
       const user = updatedUser[0];
 
       // Ghi lại lịch sử giao dịch
-      await createHistory(user.username, totalMoney, `${user.username} vừa được cộng tiền trên web thành công!`);
+    //  await createHistory(user.username, totalMoney, `${user.username} vừa được cộng tiền trên web thành công!`);
 
       return user;
     }
