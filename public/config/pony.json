@@ -3,6 +3,7 @@
     "nameServer": "Ngọc Rồng PONY",
     "description": "Ngọc rồng PONY free all, mở thành viên, x99999 thỏi vàng,... ",
     "logoUrl": "/imgs/logo-nro-pony.png",
+     "backgroundUrl": "/imgs/background/lionbg.jpg",
     "thongBao": {
         "is": true,
         "text": "<p class='text-center'>Chào mừng bạn đến với ngọc rồng PONY free all</p>-Server test vĩnh viễn không rerest<br/>-Cảm ơn bạn đã đọc thông báo<br/>-Chúc bạn chơi game vui vẻ"
