@@ -1,7 +1,7 @@
 {
     "title": "Chào mừng đến với Ngọc rồng LION",
     "nameServer": "Ngọc Rồng Lion",
-    "description": "Ngọc rồng Lion free all, mở thành viên, x99999 thỏi vàng,... ",
+    "description": "Ngọc rồng Lion free all, x99999 thỏi vàng,... ",
     "logoUrl": "/imgs/logolion.png",
     "thongBao": {
         "is": true,
@@ -11,38 +11,16 @@
         {
             "title": "Box Zalo",
             "text": "Tham nhóm zalo ngay",
-            "href": "https://zalo.me/g/brepwp373"
+            "href": "https://zalo.me/g/uaewkz091"
         }
     ],
     "payment": {
         "atm": {
             "key": "VCB",
             "nameStk": "Vietcombank",
-            "stk": "1052147418",
-            "name": "Nguyen Kim Hien"
+            "stk": "1059896787",
+            "name": "Nguyen Duc Chat"
         },
         "card": {}
-    },
-    "download": [
-        {
-            "type": 0,
-            "link": "https://drive.google.com/file/d/1_mzujN6iGQhUxBSt6-206Lvw-pJfmfBb/view?usp=sharing",
-            "content": "Phiên bản dành cho iphone. <br/>- File .ipa"
-        },
-        {
-            "type": 1,
-            "link": "https://drive.google.com/file/d/1ESQp5PU910Wb2S6tk6wok5SoEREZHW5R/view?usp=sharing",
-            "content": "Phiên bản dành cho Android. <br/>- File .apk"
-        },
-        {
-            "type": 2,
-            "link": "https://drive.google.com/file/d/12SoUiItytF1sx2pcVyXErpos588Lh5SZ/view?usp=sharing",
-            "content": "Phiên bản dành cho Windows (pc). <br/>- File .rar, .zip"
-        },
-        {
-            "type": 3,
-            "link": "/files/DragonBoyLion230Prev1.7.jar",
-            "content": "Phiên bản dành cho Java.<br/>- File .jar"
-        }
-    ]
+    }
 }

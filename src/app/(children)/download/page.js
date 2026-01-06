@@ -13,7 +13,7 @@ export default function DownloadPage() {
         {
           label: "Tải IPA",
           url: process.env.NEXT_PUBLIC_IOS_IPA,
-          color: "btn-success",
+          color: "btn-primary",
           download: true,
         },
         {
@@ -33,7 +33,7 @@ export default function DownloadPage() {
         {
           label: "Tải APK",
           url: process.env.NEXT_PUBLIC_ANDROID_APK,
-          color: "btn-success",
+          color: "btn-primary",
           download: true,
         },
       ],
@@ -47,7 +47,7 @@ export default function DownloadPage() {
         {
           label: "Tải cho Windows",
           url: process.env.NEXT_PUBLIC_WINDOWS_ZIP,
-          color: "btn-success",
+          color: "btn-primary",
           download: true,
         },
       ],
@@ -87,11 +87,19 @@ export default function DownloadPage() {
               <hr />
 
               {/* Render tất cả nút trong links */}
-              {item.links.map((btn, idx) => (
-                <a key={idx} href={btn.url} className={`btn w-100 mb-2 ${btn.color}`} {...(btn.download ? { download: true } : {})} target={btn.download ? "" : "_blank"} rel="noreferrer">
-                  {btn.label}
-                </a>
-              ))}
+              {item.links.map((btn, idx) => {
+                const isAvailable = btn.url && btn.url.trim() !== "";
+
+                return isAvailable ? (
+                  <a key={idx} href={btn.url} className={`btn w-100 mb-2 ${btn.color}`} {...(btn.download ? { download: true } : {})} target={btn.download ? "" : "_blank"} rel="noreferrer">
+                    {btn.label}
+                  </a>
+                ) : (
+                  <button key={idx} className="btn w-100 mb-2 btn-secondary" disabled>
+                    {btn.label} (Chưa có)
+                  </button>
+                );
+              })}
             </div>
           </Col>
         ))}
