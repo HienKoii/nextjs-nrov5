@@ -11,6 +11,7 @@ export async function GET() {
     }
 
     const data = await res.json();
+    console.log("data cron: ", data);
 
     return NextResponse.json({
       success: true,
