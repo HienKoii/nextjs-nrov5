@@ -16,7 +16,7 @@ export default function MainLayout({ children }) {
 
   return (
     <>
-      <SakuraEffect />
+      {/* <SakuraEffect /> */}
       <div className="container">
         <div className="main">
           <UserProvider>

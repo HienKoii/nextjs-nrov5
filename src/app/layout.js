@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
       </head>
       <body
         style={{
-          backgroundImage: "url('/imgs/backgr.png')",
+          backgroundImage: `url(${config?.backgroundUrl})`,
           backgroundSize: "cover",
           backgroundAttachment: "fixed",
         }}
