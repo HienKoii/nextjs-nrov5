@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import Logo from "../Logo/Logo";
-import useConfig from "@/hooks/useConfig";
 
-export default function NotificationModal() {
-  const { config } = useConfig();
+export default function NotificationModal({ config }) {
   const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {

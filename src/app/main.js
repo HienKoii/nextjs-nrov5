@@ -1,5 +1,5 @@
 "use client";
-import SakuraEffect from "@/components/Effect/Sakura";
+import NoticeMarquee from "@/components/Marquee/NoticeMarquee";
 import Navigation from "@/components/Nav/Navigation";
 import NotificationModal from "@/components/Notification/NotificationModal";
 import { UserProvider } from "@/context/UserContext";
@@ -9,6 +9,7 @@ import Header from "@/layouts/Header";
 import Introduce from "@/layouts/Introduce";
 import React from "react";
 import { Card } from "react-bootstrap";
+
 import { ToastContainer } from "react-toastify";
 
 export default function MainLayout({ children }) {
@@ -23,7 +24,14 @@ export default function MainLayout({ children }) {
             <ToastContainer />
             <Header />
             <Navigation />
-            {config?.thongBao?.is && <NotificationModal />}
+
+            {config?.thongBao?.is && (
+              <>
+                <NotificationModal config={config} />
+                <NoticeMarquee text={config?.thongBao?.marquee} />
+              </>
+            )}
+
             <Card>
               <Card.Body>{children}</Card.Body>
             </Card>

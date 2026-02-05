@@ -5,17 +5,17 @@ import Carousel from "react-bootstrap/Carousel";
 export default function Home() {
   const slider = [
     {
-      src: "/imgs/slider/1.png",
+      src: "/imgs/slider/4.png",
       caption: "Mở thành viên free",
       content: "Mọi người có thể mở thành viên free tại nhà. Server hoàn toàn không mất phí mở thành viên. !",
     },
     {
-      src: "/imgs/slider/2.png",
+      src: "/imgs/slider/5.png",
       caption: "Two",
       content: "Praesent commodo cursus magna, vel scelerisque nisl consectetur.",
     },
     {
-      src: "/imgs/slider/3.png",
+      src: "/imgs/slider/6.png",
       caption: "Three",
       content: "Praesent commodo cursus magna, vel scelerisque nisl consectetur.",
     },
