@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Image } from "react-bootstrap";
 
 export default function PostsItem({ post }) {
+  console.log("post", post);
   return (
     <>
       <div className="post-item gap-2 d-flex align-items-center my-2">

@@ -58,7 +58,7 @@ export default function PostCreatePage() {
           const response = await axios.post("https://upload.uploadcare.com/base/", formData);
 
           return response.data.file ? `https://ucarecdn.com/${response.data.file}/` : null;
-        })
+        }),
       );
       // 2️⃣ Kiểm tra nếu có ảnh lỗi
       const validImageUrls = uploadedImageUrls.filter((url) => url !== null);

@@ -1,4 +1,5 @@
 "use client";
+import Posts from "@/components/Posts/Posts";
 import Title from "@/components/Title/Title";
 import { Image } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
@@ -22,6 +23,8 @@ export default function Home() {
   ];
   return (
     <>
+      <Posts />
+
       <Title title="Thông tin" />
       <Carousel>
         {slider?.map((item, index) => {
@@ -37,10 +40,6 @@ export default function Home() {
                   objectFit: "cover", // Ảnh không bị méo
                 }}
               />
-              {/* <Carousel.Caption>
-                <h1 className="text-warning">{item.caption}</h1>
-                <p className="text-dark fw-bold">{item.content}</p>
-              </Carousel.Caption> */}
             </Carousel.Item>
           );
         })}

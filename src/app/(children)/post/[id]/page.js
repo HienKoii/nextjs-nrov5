@@ -1,37 +1,32 @@
 "use client";
 import Title from "@/components/Title/Title";
 import { useParams } from "next/navigation";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Col, Image, Row } from "react-bootstrap";
 import { formatTextHtml, formatTime } from "@/lib/utils";
+import useConfig from "@/hooks/useConfig";
 
 export default function PostIdPage() {
   const { id } = useParams();
+  const { config } = useConfig();
 
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const response = await axios.get(`/api/posts/${id}`);
-        console.log("Lấy bài viết theo ID: ", response.data);
-        setPost(response.data); // Giả sử API trả về object { id, title, content }
-      } catch (error) {
-        console.error("Lỗi lấy bài viết theo ID", error);
-        setPost(null);
-      } finally {
-        setLoading(false);
-      }
-    };
+    // ⛔ config chưa sẵn sàng → vẫn loading
+    if (!config?.dataPosts) return;
 
-    fetchPost();
-  }, [id]);
+    const response = config.dataPosts.find((p) => p.id == id);
+    console.log("Lấy bài viết theo ID:", response);
+
+    setPost(response || null);
+    setLoading(false);
+  }, [id, config]);
 
   return (
     <div>
-      <Title title={`Chi tiết bài viết`} />
+      <Title title="Chi tiết bài viết" />
 
       {loading ? (
         <p className="text-center text-warning">Đang tải bài viết...</p>
@@ -42,33 +37,39 @@ export default function PostIdPage() {
               <Image src="/imgs/avt.gif" alt="post" style={{ width: "100%" }} />
             </div>
             <p className="text-center text-warning" style={{ fontSize: "12px" }}>
-              {post?.username}
+              {post.username}
             </p>
           </Col>
 
           <Col xs={10} md={11} className="p-0">
             <div className="post-item p-1">
-              <div className="text-primary text-uppercase" style={{ display: "inline" }}>
+              <div className="text-primary text-uppercase d-inline">
                 <span style={{ fontSize: "12px" }} className="fw-semibold me-1">
-                  {post?.tieude}
+                  {post.tieude}
                 </span>
-                {post?.hot ? <Image src="/imgs/hot.gif" alt="hot" width={24} style={{ verticalAlign: "middle" }} /> : null}
-                {post?.new ? <Image src="/imgs/new.gif" alt="new" width={24} style={{ verticalAlign: "middle" }} /> : null}
+                {post.hot && <Image src="/imgs/hot.gif" width={24} alt="hot" />}
+                {post.new && <Image src="/imgs/new.gif" width={24} alt="new" />}
               </div>
 
               <hr className="mt-2" />
-              <div className="mt-1" dangerouslySetInnerHTML={{ __html: formatTextHtml(post?.noidung) }} />
-              {post?.image &&
-                JSON.parse(post?.image)?.map((item, index) => {
-                  return (
-                    <div key={index} className="hk-flex mt-1">
-                      <Image src={item} alt={`img-${index}`} className="w-100" style={{ borderRadius: "12px" }} />
-                    </div>
-                  );
-                })}
+
+              <div
+                className="mt-1 post-content"
+                dangerouslySetInnerHTML={{
+                  __html: formatTextHtml(post.noidung),
+                }}
+              />
+
+              {post.image &&
+                JSON.parse(post.image).map((item, index) => (
+                  <div key={index} className="hk-flex mt-1">
+                    <Image src={item} className="w-100" style={{ borderRadius: "12px" }} />
+                  </div>
+                ))}
+
               <hr className="mt-0 mb-1" />
               <p className="text-primary fst-italic" style={{ fontSize: "12px" }}>
-                {formatTime(post?.created_at)}
+                {formatTime(post.created_at)}
               </p>
             </div>
           </Col>

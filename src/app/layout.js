@@ -18,8 +18,6 @@ export default function RootLayout({ children }) {
       <body
         style={{
           backgroundImage: `url(${config?.backgroundUrl})`,
-          backgroundSize: "cover",
-          backgroundAttachment: "fixed",
         }}
       >
         <AppProvider>

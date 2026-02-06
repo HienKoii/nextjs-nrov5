@@ -56,7 +56,11 @@ a {
   border: 2px solid gold !important;
   box-shadow: 0 0 10px #ffd700cc !important;
   color: gold !important;
-  text-shadow: -1px -1px 0 #7b5d20, 1px -1px 0 #7b5d20, -1px 1px 0 #7b5d20, 1px 1px 0 #7b5d20;
+  text-shadow:
+    -1px -1px 0 #7b5d20,
+    1px -1px 0 #7b5d20,
+    -1px 1px 0 #7b5d20,
+    1px 1px 0 #7b5d20;
   min-width: 120px;
 }
 .btn-success:hover,
@@ -67,7 +71,11 @@ a {
 }
 .btn-link {
   color: gold !important;
-  text-shadow: -1px -1px 0 #7b5d20, 1px -1px 0 #7b5d20, -1px 1px 0 #7b5d20, 1px 1px 0 #7b5d20 !important;
+  text-shadow:
+    -1px -1px 0 #7b5d20,
+    1px -1px 0 #7b5d20,
+    -1px 1px 0 #7b5d20,
+    1px 1px 0 #7b5d20 !important;
 }
 .btn-link:hover {
   opacity: 0.8;
@@ -84,7 +92,11 @@ a {
   padding-bottom: 8px;
 }
 .text-warning {
-  text-shadow: -1px -1px 0 #7b5d20, 1px -1px 0 #7b5d20, -1px 1px 0 #7b5d20, 1px 1px 0 #7b5d20;
+  text-shadow:
+    -1px -1px 0 #7b5d20,
+    1px -1px 0 #7b5d20,
+    -1px 1px 0 #7b5d20,
+    1px 1px 0 #7b5d20;
 }
 
 .custom-card {

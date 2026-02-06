@@ -24,5 +24,27 @@
             "name": "Nguyen Kim Hien"
         },
         "card": {}
-    }
+    },
+    "dataPosts": [
+        {
+            "id": 1,
+            "tieude": "Chức năng cơ bản",
+            "hot": true,
+            "new": true,
+            "username": "Admin",
+            "created_at": "2024-01-15 10:30:00",
+            "noidung": "-------Một số thông tin & cơ chế-------\n👉 SKH up 3 map đầu hoặc nâng từ đồ thần linh/hủy diệt\n👉 Dame gốc - trung\n👉 Chỉ số gốc: 575k - 26k\n👉 Đồ 8 sao / +8\n👉 Chức năng khảm trang bị\n👉 Chức năng chân mệnh\n👉 Đầy đủ phó bản: dt,nrsd,cdrd,...",
+            "image": "[]"
+        },
+        {
+            "id": 2,
+            "tieude": "Event Share NHẬN VNĐ Hàng Ngày",
+            "hot": true,
+            "new": false,
+            "username": "GameMaster",
+            "created_at": "2024-01-14 15:45:00",
+            "noidung": "<p>🔈 <strong>LOA LOA LOA</strong></p><p>🔥 <strong>NRO HAM TEST VV FREE 17h 8/2/2026</strong></p><p>-----------<strong>ƯA ĐÃI</strong>-----------</p><p>🎁 Code: ham1 – ham7<br>👉 FREE VNĐ (Làm evt share hàng ngày)<br>👉 FREE Vàng (thỏi vàng)<br>👉 FREE hồng ngọc, ngọc xanh<br>👉 FREE Đệ tử<br>👉 FREE Mở thành viên</p><p>-------<strong>Một số thông tin &amp; cơ chế</strong>-------</p><p>👉 SKH up 3 map đầu hoặc nâng từ đồ thần linh/hủy diệt<br>👉 Dame gốc - trung<br>👉 Chỉ số gốc: 575k - 26k<br>👉 Đồ 8 sao / +8<br>👉 Chức năng khảm trang bị<br>👉 Chức năng chân mệnh<br>👉 Đầy đủ phó bản: dt, nrsd, cdrd,...</p><p>😍 Server cày free mở sẵn, không yêu cầu nạp – không lùa gà – không member ảo.</p><p>🎮 Giữ nguyên 90% cơ chế gốc – không màu mè – đưa bạn về đúng chất tuổi thơ</p><p>📌 Tất cả đều FREE, chỉ cần bạn chịu khó cày!</p><p>🔗 Link TestFlight: <a href=\"https://testflight.apple.com/join/xUTwaJY9\" target=\"_blank\">https://testflight.apple.com/join/xUTwaJY9</a><br>🔗 Box Zalo: <a href=\"https://zalo.me/g/kixgcy226\" target=\"_blank\">https://zalo.me/g/kixgcy226</a><br>🔗 Website: <a href=\"https://nroham.fun\" target=\"_blank\">nroham.fun</a></p><p>🎉 <strong>[EVT SHARE]</strong>: Mỗi ngày share bài này lên 10 nhóm fb NRO lậu để nhận 10k VNĐ.</p>",
+            "image": "[]"
+        }
+    ]
 }
